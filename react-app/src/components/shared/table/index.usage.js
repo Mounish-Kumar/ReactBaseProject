@@ -9,24 +9,24 @@ class TableUsage extends Component {
       id: 1,
       firstName: "Mounish",
       lastName: "V",
-      email: "mounish@example.com",
-      phone: "8888888888",
+      email: "mounish@abc.com",
+      phone: "888",
       address: "Perumbakkam",
     },
     {
       id: 2,
       firstName: "Jestin",
       lastName: "M",
-      email: "jestin@example.com",
-      phone: "9999999999",
+      email: "jestin@abc.com",
+      phone: "999",
       address: "Sholinganallur",
     },
     {
       id: 3,
       firstName: "Shan",
       lastName: "M",
-      email: "shan@example.com",
-      phone: "7777777777",
+      email: "shan@abc.com",
+      phone: "777",
       address: "Velachery",
     },
   ];
@@ -135,9 +135,9 @@ class TableUsage extends Component {
         <CodeHighlighter language="js">
           {`
 dataList = [
-  { id: 1, firstName: "Mounish", lastName: "V", email: "mounish@example.com", phone: "8888888888", address: "Perumbakkam" },
-  { id: 2, firstName: "Jestin", lastName: "M", email: "jestin@example.com", phone: "9999999999", address: "Sholinganallur" },
-  { id: 3, firstName: "Shan", lastName: "M", email: "shan@example.com", phone: "7777777777", address: "Velachery" }
+  { id: 1, firstName: "Mounish", lastName: "V", email: "mounish@abc.com", phone: "888", address: "Perumbakkam" },
+  { id: 2, firstName: "Jestin", lastName: "M", email: "jestin@abc.com", phone: "999", address: "Sholinganallur" },
+  { id: 3, firstName: "Shan", lastName: "M", email: "shan@abc.com", phone: "777", address: "Velachery" }
 ];
           `}
         </CodeHighlighter>

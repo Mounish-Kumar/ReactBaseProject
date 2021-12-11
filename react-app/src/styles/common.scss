@@ -42,15 +42,16 @@
 :root {
   --header-padding-lr: 1rem;
   --nav-width: 100vw;
+  --breadcrumb-height: 2.6rem;
 
   @include tablet {
     --header-padding-lr: 2rem;
-    --nav-width: 225px;
+    --nav-width: 300px;
   }
 
   @include desktop {
     --header-padding-lr: 6rem;
-    --nav-width: 250px;
+    --nav-width: 300px;
   }
 }
 

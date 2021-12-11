@@ -11,15 +11,16 @@
 nav {
   display: flex;
   flex-flow: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: var(--nav-width);
   height: 100vh;
+  width: var(--nav-width);
   background-color: #212121;
 
   @include mobile {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
     z-index: 900;
 
     &.show {
@@ -51,19 +52,17 @@ nav {
     text-decoration: none;
     padding: 0.8rem 1rem;
     color: #fff;
+    transition: color 0.3s ease;
 
     @include desktop {
       &:not(.disabled):not(.disable-hover):hover {
-        img,
-        i,
-        svg {
-          font-size: 1.4rem;
-          height: 1.4rem;
-        }
+        color: #33b5e5;
       }
     }
 
     &.active {
+      color: #33b5e5;
+      font-weight: 600;
       border-left: 4px solid #33b5e5;
     }
 

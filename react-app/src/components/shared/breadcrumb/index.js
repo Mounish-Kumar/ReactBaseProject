@@ -1,9 +1,35 @@
 import React from "react";
-import Breadcrumb from "./index";
+import { NavLink } from "react-router-dom";
 
 class Breadcrumb extends React.Component {
   render() {
-    return <h3>Breadcrumb Component!</h3>;
+    const trails = [
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+      { label: "Summa", path: "/employee" },
+    ];
+
+    return (
+      <div className="breadcrumb">
+        {trails &&
+          trails.map((trail, i) => (
+            <NavLink key={i} to={trail.path}>
+              {trail.label}
+            </NavLink>
+          ))}
+      </div>
+    );
   }
 }
 

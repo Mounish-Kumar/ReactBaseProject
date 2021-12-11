@@ -94,6 +94,7 @@ header {
         transition: background-color 0.3s ease;
 
         > .menu-item.active {
+          color: #33b5e5;
           border-bottom: 4px solid #33b5e5;
         }
 
@@ -118,6 +119,7 @@ header {
             z-index: 900;
 
             .menu-item.active {
+              color: #33b5e5;
               border-left: 4px solid #33b5e5;
             }
           }
@@ -175,6 +177,7 @@ header {
 
         li {
           .menu-item.active {
+            color: #33b5e5;
             border-left: 4px solid #33b5e5;
           }
 

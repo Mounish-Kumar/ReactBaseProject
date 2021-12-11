@@ -9,7 +9,7 @@ class Loader extends Component {
       <React.Fragment>
         {showFull && (
           <div className="glasspane">
-            <CircularProgress size="3rem" sx={{ color: "#33b5e5" }} />
+            <CircularProgress size="4.5rem" sx={{ color: "#33b5e5" }} />
           </div>
         )}
 

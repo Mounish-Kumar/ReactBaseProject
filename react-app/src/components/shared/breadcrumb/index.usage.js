@@ -1,8 +1,9 @@
 import React from "react";
+import Breadcrumb from "./index";
 
 class BreadcrumbUsage extends React.Component {
   render() {
-    return <h3>BreadcrumbUsage Component!</h3>;
+    return <Breadcrumb />;
   }
 }
 

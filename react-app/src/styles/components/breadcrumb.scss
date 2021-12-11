@@ -1,0 +1,46 @@
+.breadcrumb {
+  $height: var(--breadcrumb-height);
+  $border: 2px;
+  $borderneg: -2px;
+  $border-color: #fff;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  width: 100%;
+  background-color: #eee;
+
+  a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: $height;
+    padding: 0 0.8rem 0 2.1rem;
+    border-top: $border solid $border-color;
+    border-bottom: $border solid $border-color;
+    margin-top: $borderneg;
+    color: #212121;
+    transition: color 0.3s ease;
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      width: $height;
+      height: $height;
+      transform: scale(0.66) rotate(45deg);
+      z-index: 1;
+      box-shadow: $border $borderneg 0 $border $border-color;
+      border-radius: 0 3px 0 $height;
+    }
+
+    &:hover {
+      color: #33b5e5;
+    }
+
+    &:last-child {
+      cursor: default;
+      font-weight: 800;
+      color: #33b5e5;
+    }
+  }
+}

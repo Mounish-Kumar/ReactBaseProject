@@ -2,10 +2,10 @@
 
 .alert-messages {
   position: absolute;
-  top: calc(#{$header-height} + 1rem);
-  right: 1rem;
+  top: calc(var(--breadcrumb-height) + 0.8rem);
+  right: 1.2rem;
   min-width: 20%;
-  z-index: 1;
+  z-index: 800;
 
   @include desktop {
     max-width: 40%;

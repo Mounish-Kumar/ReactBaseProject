@@ -44,7 +44,7 @@ class Pagination extends Component {
           Showing {startIndex} - {endIndex} of {totalItems} results
         </div>
 
-        <div className="wrapper">
+        <div className="section-wrapper">
           <div className="section">
             <span style={{ paddingRight: "0.5rem" }}>Items per page</span>
             <select value={pageSize} onChange={this.handlePageSizeChange}>
