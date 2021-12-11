@@ -1,0 +1,50 @@
+@import "../common.scss";
+
+@include tablet-desktop {
+  .hamburger {
+    display: none;
+  }
+}
+
+@include mobile {
+  .hamburger {
+    $bar-height: 4px;
+    $bar-gap: 7px;
+    cursor: pointer;
+    display: block;
+    width: (3 * $bar-height) + (2 * $bar-gap);
+    z-index: 1000;
+
+    .bar {
+      width: 100%;
+      height: $bar-height;
+      border-radius: 6px;
+      background-color: #33b5e5;
+      transition: transform 0.3s ease;
+
+      &:nth-of-type(1) {
+        transform: translateY(calc(0px - #{$bar-gap}));
+      }
+
+      &:nth-of-type(3) {
+        transform: translateY($bar-gap);
+      }
+    }
+
+    &.close {
+      .bar {
+        &:nth-of-type(1) {
+          transform: translateY($bar-height) rotateZ(-45deg);
+        }
+
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
+
+        &:nth-of-type(3) {
+          transform: translateY(calc(0px - #{$bar-height})) rotate(45deg);
+        }
+      }
+    }
+  }
+}

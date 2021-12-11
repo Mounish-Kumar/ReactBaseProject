@@ -1,0 +1,65 @@
+@import "../common.scss";
+
+table {
+  $cell-padding: 0.6rem;
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+
+  thead {
+    tr {
+      color: #fff;
+      background-color: #2e2e2e;
+
+      th {
+        position: relative;
+        padding: $cell-padding calc(#{$cell-padding} * 2) $cell-padding
+          $cell-padding;
+        text-align: left;
+        border-left: 1px solid #000;
+
+        &:first-child {
+          border-left: 0;
+        }
+
+        @include tablet-desktop {
+          &:first-child {
+            border-radius: 6px 0 0 6px;
+          }
+
+          &:last-child {
+            border-radius: 0 6px 6px 0;
+          }
+        }
+
+        .sort-icon {
+          position: absolute;
+          cursor: pointer;
+          font-size: 1.2rem;
+          right: $cell-padding;
+          top: 50%;
+          transform: translateY(-50%);
+
+          &.unsorted {
+            transform: rotate(90deg) translate(-50%);
+          }
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #e0e0e0;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #eee;
+      }
+
+      td {
+        padding: $cell-padding;
+      }
+    }
+  }
+}

@@ -1,0 +1,158 @@
+@import "../common.scss";
+
+.modal {
+  $padding-tb: 0.8rem;
+  $padding-rl: 1.2rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  background-color: #fff;
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $padding-tb $padding-rl;
+    color: #fff;
+    background-color: #212121;
+
+    .close {
+      cursor: pointer;
+    }
+  }
+
+  .modal-body {
+    padding: calc(#{$padding-tb} * 2) $padding-rl $padding-tb $padding-rl;
+    overflow-y: auto;
+  }
+
+  .modal-footer {
+    padding: $padding-tb $padding-rl;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  // Size starts
+  @include mobile {
+    &.small,
+    &.medium,
+    &.large,
+    &.xlarge {
+      $gap: 1rem;
+      width: calc(100% - 2 * #{$gap});
+      max-width: calc(100% - 2 * #{$gap});
+      max-height: calc(100% - 2 * #{$gap});
+    }
+  }
+
+  @include tablet-desktop {
+    max-height: 100%;
+
+    &.small {
+      @include tablet {
+        width: 50%;
+        max-width: 50%;
+      }
+
+      @include desktop {
+        width: 25%;
+        max-width: 25%;
+      }
+    }
+
+    &.medium {
+      @include tablet {
+        width: 75%;
+        max-width: 75%;
+      }
+
+      @include desktop {
+        width: 50%;
+        max-width: 50%;
+      }
+    }
+
+    &.large {
+      width: 75%;
+      max-width: 75%;
+    }
+
+    &.xlarge {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  // Size ends
+
+  // Position starts
+  @include mobile {
+    &.center,
+    &.top,
+    &.bottom,
+    &.right,
+    &.left,
+    &.top-right,
+    &.top-left,
+    &.bottom-right,
+    &.bottom-left {
+      @include align-center;
+    }
+  }
+
+  @include tablet-desktop {
+    &.center {
+      @include align-center;
+    }
+
+    &.top {
+      @include align-center-x;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &.bottom {
+      @include align-center-x;
+      bottom: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &.right {
+      @include align-center-y;
+      right: 0;
+      height: 100%;
+      max-height: 100%;
+    }
+
+    &.left {
+      @include align-center-y;
+      height: 100%;
+      max-height: 100%;
+    }
+
+    &.top-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    &.top-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &.bottom-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    &.bottom-left {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  // Position ends
+}

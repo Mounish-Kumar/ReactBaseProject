@@ -1,0 +1,11 @@
+// Configure different themes here
+
+.light-theme {
+  @import "styles.scss";
+}
+
+.dark-theme {
+  @import "styles.scss";
+}
+
+@import "styles.scss";

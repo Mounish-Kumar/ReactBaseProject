@@ -1,0 +1,88 @@
+@import "../common.scss";
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile-tablet {
+    flex-flow: column;
+    align-items: start;
+  }
+
+  a {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5rem 0.8rem;
+    margin-right: 0.3rem;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #e0e0e0;
+    transition: background-color 0.3s ease;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &:not(.disabled):not(.active):hover {
+      background-color: #bdbdbd;
+    }
+
+    &.active {
+      cursor: none;
+      width: 2.5rem;
+      padding-left: 0;
+      padding-right: 0;
+      color: #fff;
+      background-color: #212121;
+    }
+
+    &.disabled {
+      cursor: none;
+      opacity: 0.4;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+
+    @include mobile {
+      flex-flow: column;
+      width: 100%;
+    }
+
+    @include tablet {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  .section {
+    @include mobile {
+      display: flex;
+      align-self: center;
+      margin: 0.5rem 0;
+    }
+
+    @include desktop {
+      margin-right: 1.5rem;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    &.results {
+      @include mobile {
+        margin-bottom: 0;
+      }
+    }
+
+    &.total-pages {
+      @include mobile-tablet {
+        display: none;
+      }
+    }
+  }
+}

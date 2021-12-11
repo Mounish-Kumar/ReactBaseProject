@@ -1,0 +1,224 @@
+@import "../common.scss";
+
+header {
+  top: 0;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: $header-height;
+  padding: 0 var(--header-padding-lr);
+  background-color: #212121;
+
+  .logo {
+    height: 100%;
+
+    img {
+      height: 100%;
+      padding: 0.3rem 0;
+    }
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    color: #fff;
+    transition: background-color 0.3s ease;
+
+    @include desktop {
+      &:not(.disable-hover):hover {
+        background-color: rgba(#000, 0.5);
+      }
+    }
+
+    @include tablet {
+      font-size: 0.85rem;
+    }
+
+    img,
+    i,
+    svg {
+      margin-right: 0.8rem;
+      font-size: 1.2rem;
+      height: 1.2rem;
+
+      @include tablet {
+        font-size: 1rem;
+        height: 1rem;
+      }
+    }
+
+    span {
+      line-height: 1.2;
+    }
+
+    .submenu-arrow {
+      font-size: 0.8rem !important;
+      height: 0.8rem !important;
+
+      @include tablet-desktop {
+        margin-right: 0 !important;
+        margin-left: 0.5rem !important;
+      }
+
+      @include mobile {
+        position: absolute;
+        right: 1rem;
+        margin: 0 !important;
+      }
+    }
+  }
+
+  .disabled {
+    cursor: none;
+    opacity: 0.5;
+  }
+
+  .user-code {
+    font-size: 0.85rem;
+  }
+
+  @include tablet-desktop {
+    > ul {
+      display: flex;
+      flex-flow: row;
+      height: 100%;
+
+      > li {
+        display: flex;
+        position: relative;
+        transition: background-color 0.3s ease;
+
+        > .menu-item.active {
+          border-bottom: 4px solid #33b5e5;
+        }
+
+        ul {
+          display: none;
+        }
+
+        &:not(.disabled):hover {
+          background-color: rgba(#000, 0.5);
+
+          ul {
+            display: flex;
+            flex-flow: column;
+            position: absolute;
+            top: $header-height;
+            right: 0;
+            min-width: 200px;
+            width: 100%;
+            border-radius: 0 0 6px 6px;
+            padding-bottom: 6px;
+            background-color: #212121;
+            z-index: 900;
+
+            .menu-item.active {
+              border-left: 4px solid #33b5e5;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    .hamburger {
+      position: absolute;
+      right: var(--header-padding-lr);
+
+      &.close {
+        position: fixed;
+      }
+    }
+
+    > ul {
+      display: none;
+
+      &.show {
+        $nav-width: 250px;
+        display: block;
+        position: fixed;
+        top: $header-height;
+        right: 0;
+        width: $nav-width;
+        height: calc(100vh - #{$header-height});
+        background-color: #212121;
+        overflow-y: scroll;
+        z-index: 900;
+
+        &:before {
+          content: " ";
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: $nav-width;
+          height: $header-height;
+          background-color: #212121;
+          z-index: 900;
+        }
+
+        &:after {
+          content: " ";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: calc(100% - #{$nav-width});
+          height: 100%;
+          background-color: rgba(#000, 0.5);
+          z-index: 800;
+        }
+
+        li {
+          .menu-item.active {
+            border-left: 4px solid #33b5e5;
+          }
+
+          ul {
+            display: none;
+          }
+
+          &:not(.disabled):hover {
+            ul {
+              display: block;
+
+              .menu-item {
+                padding-left: 2.5rem;
+                background-color: #161616;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.language-options {
+  display: flex;
+  padding: 0.4rem 0;
+
+  .language {
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #000;
+
+    &.selected {
+      cursor: none;
+      font-weight: 800;
+      color: #000;
+      background-color: #33b5e5;
+    }
+  }
+
+  .language + .language {
+    margin-left: 0.5rem;
+  }
+}

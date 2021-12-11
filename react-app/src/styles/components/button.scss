@@ -1,0 +1,30 @@
+@import "../common.scss";
+
+button,
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  transition: background-color 0.3s ease;
+
+  &:not(.disabled):hover {
+    background-color: #bdbdbd;
+  }
+
+  &.primary {
+    color: #fff;
+    background-color: #212121;
+
+    &:not(.disabled):hover {
+      background-color: #080808;
+    }
+  }
+}
+
+button + button {
+  margin-left: 0.75rem;
+}

@@ -1,0 +1,76 @@
+// Write styles that are reusable across different stylesheets here
+// Example: variables and media queries
+// This stylesheet should be imported in all other stylesheets
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mobile-tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+@mixin tablet-desktop {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin wide-screen {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+// CSS Variables
+:root {
+  --header-padding-lr: 1rem;
+  --nav-width: 100vw;
+
+  @include tablet {
+    --header-padding-lr: 2rem;
+    --nav-width: 225px;
+  }
+
+  @include desktop {
+    --header-padding-lr: 6rem;
+    --nav-width: 250px;
+  }
+}
+
+// SCSS Variables
+$header-height: 3rem;
+
+@mixin align-center-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin align-center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin align-center {
+  @include align-center-x;
+  @include align-center-y;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,74 @@
+@import "../common.scss";
+
+.alert-messages {
+  position: absolute;
+  top: calc(#{$header-height} + 1rem);
+  right: 1rem;
+  min-width: 20%;
+  z-index: 1;
+
+  @include desktop {
+    max-width: 40%;
+  }
+
+  @include tablet {
+    max-width: 60%;
+  }
+
+  @include mobile {
+    max-width: 80%;
+  }
+
+  div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.4rem 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    color: #fff;
+
+    &.success {
+      background-color: rgba(#00c851, 0.9);
+    }
+
+    &.error {
+      background-color: rgba(#ff4444, 0.9);
+    }
+
+    &.warning {
+      background-color: rgba(#ffbb33, 0.9);
+    }
+
+    &.info {
+      background-color: rgba(#33b5e5, 0.9);
+    }
+
+    svg:not(.close) {
+      font-size: 2rem;
+      margin-right: 0.8rem;
+
+      @include mobile {
+        font-size: 1.75rem;
+      }
+    }
+
+    span {
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.2;
+
+      @include mobile {
+        font-size: 1rem;
+      }
+    }
+
+    .close-icon {
+      cursor: pointer;
+      position: absolute;
+      top: 0px;
+      right: -8px;
+      padding: 6px;
+    }
+  }
+}

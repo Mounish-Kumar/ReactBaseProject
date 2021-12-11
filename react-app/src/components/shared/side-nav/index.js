@@ -1,0 +1,120 @@
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import TranslateIcon from "@mui/icons-material/Translate";
+import PaletteIcon from "@mui/icons-material/Palette";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ExpandCollapse from "./../expand-collapse/index";
+import Hamburger from "./../hamburger/index";
+import PropTypes from "prop-types";
+
+class SideNav extends Component {
+  state = { showMenu: false };
+
+  getMenuItem = (item) => {
+    const { path, icon, label, disabled } = item;
+    let classes = `menu-item ${disabled ? "disabled" : ""}`;
+
+    return (
+      <React.Fragment>
+        {path && (
+          <NavLink to={path} className={classes}>
+            {icon}
+            <span>{label}</span>
+          </NavLink>
+        )}
+
+        {!path && (
+          <div className={classes}>
+            {icon}
+            <span>{label}</span>
+          </div>
+        )}
+      </React.Fragment>
+    );
+  };
+
+  toggleMenu = (isClose) => this.setState({ showMenu: isClose });
+
+  render() {
+    const { logo, menu, settings } = this.props;
+    const { userName, userCode, logoutUrl, changeLanguage, changeTheme } =
+      settings || {};
+    const { showMenu } = this.state;
+
+    return (
+      <React.Fragment>
+        <Hamburger className="nav-hamburger" onChange={this.toggleMenu} />
+
+        <nav className={showMenu ? "show" : ""}>
+          {logo && (
+            <NavLink to={logo.path} className="logo">
+              {logo.icon}
+            </NavLink>
+          )}
+
+          {(userName || userCode) && (
+            <div className="menu-item user">
+              <AccountCircleIcon className="icon" />
+              <span>
+                {userName || userCode}
+                {userName && userCode && (
+                  <div className="user-code">{userCode}</div>
+                )}
+              </span>
+            </div>
+          )}
+
+          <div className="menu">
+            {menu &&
+              menu.length > 0 &&
+              menu.map((item, i) => (
+                <ExpandCollapse
+                  key={i}
+                  collapse={true}
+                  collapsible={this.getMenuItem(item)}
+                >
+                  {item.subMenu &&
+                    item.subMenu.length > 0 &&
+                    item.subMenu.map((subItem, j) => (
+                      <div key={j} className="sub-menu">
+                        {this.getMenuItem(subItem)}
+                      </div>
+                    ))}
+                </ExpandCollapse>
+              ))}
+
+            {changeLanguage && (
+              <div className="menu-item disabled">
+                <TranslateIcon className="icon" />
+                <span>Change Language</span>
+              </div>
+            )}
+
+            {changeTheme && (
+              <div className="menu-item disabled">
+                <PaletteIcon className="icon" />
+                <span>Change Theme</span>
+              </div>
+            )}
+          </div>
+
+          {logoutUrl && (
+            <a href={logoutUrl} className="menu-item logout">
+              <PowerSettingsNewIcon className="icon" />
+              <span>Logout</span>
+            </a>
+          )}
+        </nav>
+      </React.Fragment>
+    );
+  }
+}
+
+SideNav.propTypes = {
+  logo: PropTypes.object.isRequired,
+  menu: PropTypes.array.isRequired,
+  settings: PropTypes.object,
+};
+
+export default SideNav;
