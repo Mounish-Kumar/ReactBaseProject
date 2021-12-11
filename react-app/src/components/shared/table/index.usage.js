@@ -68,6 +68,28 @@ class TableUsage extends Component {
 
   handleSort = (key, order) => {
     console.log("Sort by '" + key + "' in " + order);
+    // Your fetch call here
+  };
+
+  handlePaginate = (page) => {
+    const { currentPage, pageSize, startIndex, endIndex } = page;
+    console.log("Current Page Number = " + currentPage);
+    console.log("Page Size = " + pageSize);
+    console.log("Page Start Index = " + startIndex);
+    console.log("Page End Index = " + endIndex);
+    // Your fetch call here
+  };
+
+  handleSortAndPaginate = (sort, page) => {
+    const { key, order } = sort;
+    console.log("Sort by '" + key + "' in " + order);
+
+    const { currentPage, pageSize, startIndex, endIndex } = page;
+    console.log("Current Page Number = " + currentPage);
+    console.log("Page Size = " + pageSize);
+    console.log("Page Start Index = " + startIndex);
+    console.log("Page End Index = " + endIndex);
+    // Your fetch call here
   };
 
   code = (
@@ -76,6 +98,10 @@ class TableUsage extends Component {
       mapping={this.mapping}
       sortInit={this.sortInit}
       onSort={this.handleSort}
+      totalItems={45}
+      onPaginate={this.handlePaginate}
+      paginateOnLoad={true}
+      onSortAndPaginate={this.handleSortAndPaginate}
     />
   );
 
@@ -95,6 +121,12 @@ class TableUsage extends Component {
   mapping={this.mapping}
   sortInit={this.sortInit}
   onSort={this.handleSort}
+
+  totalItems={45}
+  onPaginate={this.handlePaginate}
+  paginateOnLoad={true}
+
+  onSortAndPaginate={this.handleSortAndPaginate}
 />
           `}
         </CodeHighlighter>
@@ -162,6 +194,56 @@ sortInit = { key: "id", order: "desc" };
           {`
 handleSort = (key, order) => {
   console.log("Sort by '" + key + "' in " + order);
+  // Your fetch call here
+};
+          `}
+        </CodeHighlighter>
+        <br />
+        Set total number of records in this attribute. This should be used only
+        if you need pagination.
+        <CodeHighlighter language="js">
+          {`
+totalItems={45}
+          `}
+        </CodeHighlighter>
+        <br />
+        Callback method on Pagination. This should be used only if you need
+        pagination.
+        <CodeHighlighter language="js">
+          {`
+handlePaginate = (page) => {
+  const { currentPage, pageSize, startIndex, endIndex } = page;
+  console.log("Current Page Number = " + currentPage);
+  console.log("Page Size = " + pageSize);
+  console.log("Page Start Index = " + startIndex);
+  console.log("Page End Index = " + endIndex);
+  // Your fetch call here
+};
+          `}
+        </CodeHighlighter>
+        <br />
+        To call onPaginate method on component load. This should be used only if
+        you need pagination.
+        <CodeHighlighter language="js">
+          {`
+paginateOnLoad={true}
+          `}
+        </CodeHighlighter>
+        <br />
+        Callback method on both Sorting and Pagination. If you're using
+        onSortAndPaginate, you can skip onSort and onPaginate.
+        <CodeHighlighter language="js">
+          {`
+handleSortAndPaginate = (sort, page) => {
+  const { key, order } = sort;
+  console.log("Sort by '" + key + "' in " + order);
+
+  const { currentPage, pageSize, startIndex, endIndex } = page;
+  console.log("Current Page Number = " + currentPage);
+  console.log("Page Size = " + pageSize);
+  console.log("Page Start Index = " + startIndex);
+  console.log("Page End Index = " + endIndex);
+  // Your fetch call here
 };
           `}
         </CodeHighlighter>

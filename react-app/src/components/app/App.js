@@ -4,6 +4,7 @@ import navOptions from "./navOptions";
 import routes, { REDIRECT_DEFAULT } from "./routes";
 import SideNav from "../shared/side-nav";
 import Loader from "./../shared/loader/index";
+import AccessDenied from "../shared/access-denied";
 
 class App extends React.Component {
   constructor() {
@@ -13,12 +14,16 @@ class App extends React.Component {
       logo: navOptions.logo,
       menu: navOptions.menu,
       settings: navOptions.settings,
+      routes,
+      loader: false,
     };
   }
 
+  componentDidMount() {}
+
   render() {
-    const { logo, menu, settings } = this.state;
-    const fullMenu =
+    const { logo, menu, settings, routes, loader } = this.state;
+    const enabledMenu =
       menu &&
       menu.length &&
       menu.flatMap((menuItem) => menuItem.subMenu || [menuItem]);
@@ -29,22 +34,28 @@ class App extends React.Component {
 
         <div className="container">
           <Routes>
-            {fullMenu.map((menuItem) => (
-              <Route
-                key={menuItem.path}
-                path={menuItem.path}
-                element={menuItem.component}
-              />
-            ))}
+            {enabledMenu &&
+              enabledMenu.length &&
+              enabledMenu.map((menuItem) => (
+                <Route
+                  key={menuItem.path}
+                  path={menuItem.path}
+                  element={
+                    menuItem.disabled ? <AccessDenied /> : menuItem.component
+                  }
+                />
+              ))}
+
             {routes &&
               routes.length &&
               routes.map((route) => (
                 <Route
                   key={route.path}
                   path={route.path}
-                  element={route.component}
+                  element={route.disabled ? <AccessDenied /> : route.component}
                 />
               ))}
+
             <Route
               path="*"
               element={<Navigate replace to={REDIRECT_DEFAULT} />}
@@ -52,7 +63,7 @@ class App extends React.Component {
           </Routes>
         </div>
 
-        <Loader showFull={false} />
+        <Loader showFull={loader} />
       </HashRouter>
     );
   }

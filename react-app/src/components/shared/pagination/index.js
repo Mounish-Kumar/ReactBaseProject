@@ -21,12 +21,15 @@ class Pagination extends Component {
 
   navigateTo = (currentPage) => {
     const { pageSize } = this.state;
-    const { totalItems, onPaginate } = this.props;
+    const { totalItems, onPaginate, onSortAndPaginate, sortedField } =
+      this.props;
     const startIndex = (currentPage - 1) * pageSize + 1;
     const endIndex = Math.min(currentPage * pageSize, totalItems);
 
     this.setState({ currentPage, startIndex, endIndex }, () => {
-      onPaginate({ currentPage, pageSize, startIndex, endIndex });
+      const page = { currentPage, pageSize, startIndex, endIndex };
+      onPaginate && onPaginate(page);
+      onSortAndPaginate && onSortAndPaginate(sortedField, page);
     });
   };
 
@@ -100,6 +103,8 @@ Pagination.propTypes = {
   totalItems: PropTypes.number.isRequired,
   onPaginate: PropTypes.func.isRequired,
   paginateOnLoad: PropTypes.bool,
+  onSortAndPaginate: PropTypes.func,
+  sortedField: PropTypes.object,
 };
 
 export default Pagination;
