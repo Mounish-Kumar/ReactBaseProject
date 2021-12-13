@@ -17,6 +17,7 @@ class App extends React.Component {
       menu: navOptions.menu,
       settings: navOptions.settings,
       routes,
+      trails: [],
       messages: [],
       loader: false,
     };
@@ -24,17 +25,28 @@ class App extends React.Component {
 
   componentDidMount() {}
 
+  addBreadcrumbTrail = (label, path) => {
+    this.setState({
+      trails: [...this.state.trails, { label, path }],
+    });
+  };
+
+  startBreadcrumbTrail = (label, path) => {
+    this.setState({
+      trails: [{ label, path }],
+    });
+  };
+
   deleteMessage = (index) => {
     const messages = this.state.messages.filter((item, i) => index !== i);
     this.setState({ messages });
   };
 
   render() {
-    const { logo, menu, settings, routes, messages, loader } = this.state;
+    const { logo, menu, settings, routes, trails, messages, loader } =
+      this.state;
     const enabledMenu =
-      menu &&
-      menu.length &&
-      menu.flatMap((menuItem) => menuItem.subMenu || [menuItem]);
+      menu && menu.flatMap((menuItem) => menuItem.subMenu || [menuItem]);
 
     return (
       <HashRouter>
@@ -42,12 +54,18 @@ class App extends React.Component {
           <SideNav logo={logo} menu={menu} settings={settings} />
 
           <div className="wrapper">
-            <Breadcrumb />
+            {trails && (
+              <Breadcrumb
+                trails={trails}
+                onTrailsChange={(updatedTrails) =>
+                  this.setState({ trails: updatedTrails })
+                }
+              />
+            )}
 
             <div className="container">
               <Routes>
                 {enabledMenu &&
-                  enabledMenu.length &&
                   enabledMenu.map((menuItem) => (
                     <Route
                       key={menuItem.path}
@@ -63,7 +81,6 @@ class App extends React.Component {
                   ))}
 
                 {routes &&
-                  routes.length &&
                   routes.map((route) => (
                     <Route
                       key={route.path}

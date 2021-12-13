@@ -1,36 +1,26 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
-class Breadcrumb extends React.Component {
-  render() {
-    const trails = [
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-      { label: "Summa", path: "/employee" },
-    ];
+export default function Breadcrumb(props) {
+  const { trails, onTrailsChange } = props;
 
-    return (
-      <div className="breadcrumb">
-        {trails &&
-          trails.map((trail, i) => (
-            <NavLink key={i} to={trail.path}>
-              {trail.label}
-            </NavLink>
-          ))}
-      </div>
-    );
-  }
+  const handleClick = (clickedIndex) => {
+    if (clickedIndex < trails.length - 1) {
+      onTrailsChange(trails.filter((trail, index) => index <= clickedIndex));
+    }
+  };
+
+  return (
+    <div className="breadcrumb">
+      {trails &&
+        trails.map((trail, index) => (
+          <NavLink
+            key={index}
+            to={trail.path}
+            onClick={() => handleClick(index)}
+          >
+            {trail.label}
+          </NavLink>
+        ))}
+    </div>
+  );
 }
-
-export default Breadcrumb;

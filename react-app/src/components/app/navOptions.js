@@ -29,6 +29,7 @@ const navOptions = {
   logo: {
     path: "/dashboard",
     icon: <img src={logo} alt="Logo" />,
+    title: "React Backoffice",
   },
   settings: {
     userName: "Mounish Kumar",

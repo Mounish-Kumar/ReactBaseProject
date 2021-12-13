@@ -10,6 +10,7 @@ class SideNavUsage extends Component {
   logo = {
     path: "/home",
     icon: <img src={logo} alt="Logo" />,
+    title: "React Backoffice",
   };
 
   menu = [
@@ -71,8 +72,9 @@ class SideNavUsage extends Component {
         To configure logo in SideNav:
         <CodeHighlighter language="js">{`
 logo = {
-  path: "/dashboard",  // Path to redirect on clicking logo
-  icon: <img className="logo" src={logo} alt="Logo" />  // img tag for logo
+  path: "/dashboard",   // Path to redirect on clicking logo
+  icon: <img className="logo" src={logo} alt="Logo" />,  // img tag for logo
+  title: "React Backoffice"   // Title below the logo
 }
         `}</CodeHighlighter>
         <br />

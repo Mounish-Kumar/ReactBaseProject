@@ -4,12 +4,14 @@ import TranslateIcon from "@mui/icons-material/Translate";
 import PaletteIcon from "@mui/icons-material/Palette";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import ExpandCollapse from "./../expand-collapse/index";
 import Hamburger from "./../hamburger/index";
 import PropTypes from "prop-types";
 
 class SideNav extends Component {
-  state = { showMenu: false };
+  state = { showMenu: false, minimized: false };
 
   getMenuItem = (item) => {
     const { path, icon, label, disabled } = item;
@@ -36,20 +38,40 @@ class SideNav extends Component {
 
   toggleMenu = (isClose) => this.setState({ showMenu: isClose });
 
+  minimizeMaximize = () => this.setState({ minimized: !this.state.minimized });
+
   render() {
     const { logo, menu, settings } = this.props;
     const { userName, userCode, logoutUrl, changeLanguage, changeTheme } =
       settings || {};
-    const { showMenu } = this.state;
+    const { showMenu, minimized } = this.state;
 
     return (
       <React.Fragment>
         <Hamburger className="nav-hamburger" onChange={this.toggleMenu} />
 
-        <nav className={showMenu ? "show" : ""}>
+        <nav
+          className={
+            (showMenu ? "show " : "") + (minimized ? "minimized " : "")
+          }
+        >
+          {!minimized && (
+            <IndeterminateCheckBoxOutlinedIcon
+              className="minimize-icon"
+              onClick={this.minimizeMaximize}
+            />
+          )}
+          {minimized && (
+            <AddBoxOutlinedIcon
+              className="minimize-icon"
+              onClick={this.minimizeMaximize}
+            />
+          )}
+
           {logo && (
             <NavLink to={logo.path} className="logo">
               {logo.icon}
+              <div className="title">{logo.title}</div>
             </NavLink>
           )}
 

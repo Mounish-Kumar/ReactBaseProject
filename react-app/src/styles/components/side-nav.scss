@@ -9,11 +9,20 @@
 }
 
 nav {
+  &.minimized {
+    --nav-width: 5rem;
+
+    .collapse-arrow {
+      color: transparent !important;
+    }
+  }
+
   display: flex;
   flex-flow: column;
   height: 100vh;
   width: var(--nav-width);
   background-color: #212121;
+  transition: width 0.6s ease-out;
 
   @include mobile {
     display: none;
@@ -28,12 +37,21 @@ nav {
     }
   }
 
+  .minimize-icon {
+    position: absolute;
+    font-size: 1.2rem;
+    color: #fff;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
   .logo {
     display: flex;
-    justify-content: center;
-    max-width: 100%;
-    max-height: 5rem;
-    padding: 0.6rem 1.2rem;
+    flex-flow: column;
+    align-items: center;
+    padding: 0.8rem 0.6rem 0.6rem;
     background-color: rgba(#000, 0.5);
 
     @include mobile {
@@ -42,7 +60,17 @@ nav {
 
     img {
       max-width: 100%;
-      max-height: 100%;
+      max-height: 3rem;
+      transition: max-height 0.3s ease;
+    }
+
+    .title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      padding-top: 0.2rem;
+      text-align: center;
+      color: #fff;
+      transition: font-size 0.3s ease;
     }
   }
 
@@ -111,5 +139,48 @@ nav {
 
   .logout {
     border-top: 2px solid rgba(#000, 0.5);
+  }
+
+  &.minimized {
+    $padding: 0.4rem;
+    $font-size: 0.6rem;
+
+    .logo {
+      padding: 0.6rem $padding $padding;
+
+      img {
+        max-height: 2rem;
+      }
+
+      .title {
+        font-size: $font-size;
+      }
+    }
+
+    .menu-item {
+      flex-flow: column;
+      font-size: $font-size;
+      padding: $padding;
+      text-align: center;
+
+      img,
+      i,
+      svg {
+        margin-right: 0rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .user-code {
+        font-size: $font-size;
+      }
+    }
+
+    .menu {
+      .sub-menu {
+        .menu-item {
+          padding-left: $padding;
+        }
+      }
+    }
   }
 }
