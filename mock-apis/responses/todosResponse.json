@@ -1,0 +1,21 @@
+{
+    "status": "OK",
+    "list": [
+        {
+            "id": 1,
+            "name": "Eat",
+            "addedDateTime": "26/12/1991 12:00:00"
+        },
+        {
+            "id": 2,
+            "name": "Sleep",
+            "addedDateTime": "01/01/2020 12:00:00",
+            "completedDateTime": "02/01/2021 12:00:00"
+        },
+        {
+            "id": 3,
+            "name": "Repeat",
+            "addedDateTime": "26/12/1991 12:00:00"
+        }
+    ]
+  }
