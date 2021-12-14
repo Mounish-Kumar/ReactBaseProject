@@ -1,26 +1,23 @@
 import { NavLink } from "react-router-dom";
 
 export default function Breadcrumb(props) {
-  const { trails, onTrailsChange } = props;
-
-  const handleClick = (clickedIndex) => {
-    if (clickedIndex < trails.length - 1) {
-      onTrailsChange(trails.filter((trail, index) => index <= clickedIndex));
-    }
-  };
+  const { trails, onNavigate } = props;
 
   return (
-    <div className="breadcrumb">
-      {trails &&
-        trails.map((trail, index) => (
-          <NavLink
-            key={index}
-            to={trail.path}
-            onClick={() => handleClick(index)}
-          >
-            {trail.label}
-          </NavLink>
-        ))}
-    </div>
+    <>
+      {trails && (
+        <div className="breadcrumb">
+          {trails.map((trail, index) => (
+            <NavLink
+              key={index}
+              to={trail.path}
+              onClick={() => onNavigate({ trail, index })}
+            >
+              {trail.label || trail.path}
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

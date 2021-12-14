@@ -7,61 +7,51 @@ import Loader from "./../shared/loader/index";
 import AccessDenied from "../shared/access-denied";
 import Breadcrumb from "../shared/breadcrumb";
 import AlertMessage from "./../shared/alert-message/index";
+import { connect } from "react-redux";
+import {
+  startBreadcrumbTrail,
+  deleteBreadcrumbTrails,
+  deleteMessage,
+} from "../../store/appSlice";
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      logo: navOptions.logo,
       menu: navOptions.menu,
       settings: navOptions.settings,
       routes,
-      trails: [],
-      messages: [],
-      loader: false,
     };
   }
 
   componentDidMount() {}
 
-  addBreadcrumbTrail = (label, path) => {
-    this.setState({
-      trails: [...this.state.trails, { label, path }],
-    });
-  };
-
-  startBreadcrumbTrail = (label, path) => {
-    this.setState({
-      trails: [{ label, path }],
-    });
-  };
-
-  deleteMessage = (index) => {
-    const messages = this.state.messages.filter((item, i) => index !== i);
-    this.setState({ messages });
-  };
-
   render() {
-    const { logo, menu, settings, routes, trails, messages, loader } =
-      this.state;
+    const { menu, settings, routes } = this.state;
     const enabledMenu =
       menu && menu.flatMap((menuItem) => menuItem.subMenu || [menuItem]);
+    const {
+      trails,
+      messages,
+      loader,
+      startBreadcrumbTrail,
+      deleteBreadcrumbTrails,
+      deleteMessage,
+    } = this.props;
 
     return (
       <HashRouter>
         <div className="root">
-          <SideNav logo={logo} menu={menu} settings={settings} />
+          <SideNav
+            logo={navOptions.logo}
+            menu={menu}
+            settings={settings}
+            onNavigate={startBreadcrumbTrail}
+          />
 
           <div className="wrapper">
-            {trails && (
-              <Breadcrumb
-                trails={trails}
-                onTrailsChange={(updatedTrails) =>
-                  this.setState({ trails: updatedTrails })
-                }
-              />
-            )}
+            <Breadcrumb trails={trails} onNavigate={deleteBreadcrumbTrails} />
 
             <div className="container">
               <Routes>
@@ -100,11 +90,23 @@ class App extends React.Component {
           </div>
         </div>
 
-        <AlertMessage messages={messages} onDelete={this.deleteMessage} />
+        <AlertMessage messages={messages} onDelete={deleteMessage} />
         <Loader showFull={loader} />
       </HashRouter>
     );
   }
 }
 
-export default App;
+const mapStoreToProps = (store) => ({
+  trails: store.app.trails,
+  messages: store.app.messages,
+  loader: store.app.loader,
+});
+
+const mapDispatchToProps = {
+  startBreadcrumbTrail,
+  deleteBreadcrumbTrails,
+  deleteMessage,
+};
+
+export default connect(mapStoreToProps, mapDispatchToProps)(App);

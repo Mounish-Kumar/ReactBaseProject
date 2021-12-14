@@ -11,7 +11,7 @@ class AlertMessage extends Component {
     const { messages, onDelete } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         {messages && messages.length > 0 && (
           <div className="alert-messages">
             {messages.map((item, i) => {
@@ -46,7 +46,7 @@ class AlertMessage extends Component {
             })}
           </div>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

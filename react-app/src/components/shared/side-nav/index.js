@@ -15,12 +15,17 @@ class SideNav extends Component {
 
   getMenuItem = (item) => {
     const { path, icon, label, disabled } = item;
+    const { onNavigate } = this.props;
     let classes = `menu-item ${disabled ? "disabled" : ""}`;
 
     return (
       <React.Fragment>
         {path && (
-          <NavLink to={path} className={classes}>
+          <NavLink
+            to={path}
+            className={classes}
+            onClick={() => onNavigate && onNavigate({ label, path })}
+          >
             {icon}
             <span>{label}</span>
           </NavLink>
@@ -41,7 +46,7 @@ class SideNav extends Component {
   minimizeMaximize = () => this.setState({ minimized: !this.state.minimized });
 
   render() {
-    const { logo, menu, settings } = this.props;
+    const { logo, menu, settings, onNavigate } = this.props;
     const { userName, userCode, logoutUrl, changeLanguage, changeTheme } =
       settings || {};
     const { showMenu, minimized } = this.state;
@@ -69,7 +74,11 @@ class SideNav extends Component {
           )}
 
           {logo && (
-            <NavLink to={logo.path} className="logo">
+            <NavLink
+              to={logo.path}
+              className="logo"
+              onClick={() => onNavigate && onNavigate({ path: logo.path })}
+            >
               {logo.icon}
               <div className="title">{logo.title}</div>
             </NavLink>

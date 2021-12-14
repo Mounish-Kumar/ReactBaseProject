@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 class Loader extends Component {
   render() {
     const { showFull, show, size, color } = this.props;
+
     return (
-      <React.Fragment>
+      <>
         {showFull && (
           <div className="glasspane">
             <CircularProgress size="4.5rem" sx={{ color: "#33b5e5" }} />
@@ -19,7 +20,7 @@ class Loader extends Component {
             sx={{ color: color || "#33b5e5" }}
           />
         )}
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -25,12 +25,12 @@ class SideNavUsage extends Component {
       subMenu: [
         {
           label: "Page 1",
-          path: "",
+          path: "/sidenav",
           icon: <LaptopMacIcon />,
         },
         {
           label: "Page 2",
-          path: "",
+          path: "/sidenav",
           disabled: true,
           icon: <LaptopMacIcon />,
         },
@@ -46,8 +46,17 @@ class SideNavUsage extends Component {
     changeTheme: true,
   };
 
+  handleNavigate = ({ label, path }) => {
+    console.log(`Navigated to ${label} : ${path}`);
+  };
+
   code = (
-    <SideNav logo={this.logo} menu={this.menu} settings={this.settings} />
+    <SideNav
+      logo={this.logo}
+      menu={this.menu}
+      settings={this.settings}
+      onNavigate={this.handleNavigate}
+    />
   );
 
   render() {
@@ -65,6 +74,7 @@ class SideNavUsage extends Component {
   logo={this.logo}
   menu={this.menu}
   settings={this.settings}
+  onNavigate={this.handleNavigate}
 />
           `}
         </CodeHighlighter>
@@ -92,12 +102,12 @@ menu = [
     subMenu: [  // To configure sub menu
       {
         label: "Page 1",  // Text to display in sub menu item
-        path: "/page1",  // Path to navigate on clicking sub menu item
+        path: "/sidenav",  // Path to navigate on clicking sub menu item
         icon: <LaptopMacIcon />  // icon for the sub menu item
       },
       {
         label: "Page 2",  // Text to display in sub menu item
-        path: "/page2", // Path to navigate on clicking sub menu item
+        path: "/sidenav", // Path to navigate on clicking sub menu item
         disabled: true,  // To disable menu item
         icon: <LaptopMacIcon />  // icon for the sub menu item
       }
@@ -115,6 +125,13 @@ settings = {
   changeLanguage: true,  // To show Change Language setting
   changeTheme: true  // To show Change Theme setting
 }
+        `}</CodeHighlighter>
+        <br />
+        Optional callback method to handle onNavigate
+        <CodeHighlighter language="js">{`
+handleNavigate = ({ label, path }) => {
+  console.log("Navigated to " + label + " : " + path);
+};
         `}</CodeHighlighter>
       </React.Fragment>
     );

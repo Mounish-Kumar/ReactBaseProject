@@ -5,10 +5,15 @@ import Breadcrumb from "./index";
 class BreadcrumbUsage extends React.Component {
   state = {
     trails: [
-      { label: "Dashboard", path: "/dashboard" },
-      { label: "Employee", path: "/employee" },
-      { label: "AccessDenied", path: "/accessdenied" },
+      { label: "Dashboard", path: "/breadcrumb" },
+      { label: "Employee", path: "/breadcrumb" },
+      { label: "AccessDenied", path: "/breadcrumb" },
     ],
+  };
+
+  handleNavigate = ({ trail, index }) => {
+    const filteredTrails = this.state.trails.filter((item, i) => i <= index);
+    this.setState({ trails: filteredTrails });
   };
 
   render() {
@@ -18,9 +23,7 @@ class BreadcrumbUsage extends React.Component {
         <br />
         <Breadcrumb
           trails={this.state.trails}
-          onTrailsChange={(updatedTrails) =>
-            this.setState({ trails: updatedTrails })
-          }
+          onNavigate={this.handleNavigate}
         />
         <br />
         <h3>Usage</h3>
@@ -28,7 +31,7 @@ class BreadcrumbUsage extends React.Component {
           {`
 <Breadcrumb
   trails={this.state.trails}
-  onTrailsChange={(updatedTrails) => this.setState({ trails: updatedTrails })}
+  onNavigate={this.handleNavigate}
 />
           `}
         </CodeHighlighter>
@@ -38,27 +41,21 @@ class BreadcrumbUsage extends React.Component {
           {`
 state = {
   trails: [
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Employee", path: "/employee" },
-    { label: "AccessDenied", path: "/accessdenied" }
+    { label: "Dashboard", path: "/breadcrumb" },
+    { label: "Employee", path: "/breadcrumb" },
+    { label: "AccessDenied", path: "/breadcrumb" }
   ]
 };
           `}
         </CodeHighlighter>
         <br />
-        Methods to add/start trail in breadcrumb by updating the state
+        Callback method onNavigate (Can be used to remove trails on the right
+        side)
         <CodeHighlighter language="js">
           {`
-addBreadcrumbTrail = (label, path) => {
-  this.setState({
-    trails: [...this.state.trails, { label, path }]
-  });
-};
-
-startBreadcrumbTrail = (label, path) => {
-  this.setState({
-    trails: [{ label, path }]
-  });
+handleNavigate = ({ trail, index }) => {
+  const filteredTrails = this.state.trails.filter((item, i) => i <= index);
+  this.setState({ trails: filteredTrails });
 };
           `}
         </CodeHighlighter>
