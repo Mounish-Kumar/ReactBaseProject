@@ -25,7 +25,10 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const path = window.location.hash.substring(1);
+    this.props.startBreadcrumbTrail({ path });
+  }
 
   render() {
     const { menu, settings, routes } = this.state;
@@ -51,7 +54,12 @@ class App extends React.Component {
           />
 
           <div className="wrapper">
-            <Breadcrumb trails={trails} onNavigate={deleteBreadcrumbTrails} />
+            <Breadcrumb
+              trails={trails}
+              onNavigate={(item) => {
+                deleteBreadcrumbTrails(item);
+              }}
+            />
 
             <div className="container">
               <Routes>

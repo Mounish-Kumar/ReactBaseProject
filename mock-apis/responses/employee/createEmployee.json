@@ -1,0 +1,11 @@
+{
+    "message": "Successfully created!",
+    "fieldErrorMessages": null,
+    "employee": {
+        "id": 1,
+        "firstName": "Mounish",
+        "email": "mounish@abc.com",
+        "phone": "888",
+        "address": "Perumbakkam"
+    }
+}

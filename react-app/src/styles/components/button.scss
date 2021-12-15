@@ -12,7 +12,7 @@ input[type="submit"] {
   transition: background-color 0.3s ease;
 
   &:not(.disabled):hover {
-    background-color: #bdbdbd;
+    // background-color: #bdbdbd;
   }
 
   &.primary {
@@ -20,7 +20,7 @@ input[type="submit"] {
     background-color: #212121;
 
     &:not(.disabled):hover {
-      background-color: #080808;
+      // background-color: #080808;
     }
   }
 }

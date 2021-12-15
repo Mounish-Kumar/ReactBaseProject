@@ -20,8 +20,8 @@ class Table extends Component {
 
   componentDidMount() {
     const { sortInit } = this.props;
-    if (sortInit) {
-      const { key, order } = sortInit;
+    const { key, order } = sortInit || {};
+    if (key && order) {
       this.handleSort(key, order);
     }
   }
@@ -88,7 +88,7 @@ class Table extends Component {
           </tbody>
         </table>
         <br />
-        {totalItems && (onPaginate || onSortAndPaginate) && (
+        {totalItems && (onPaginate || onSortAndPaginate) ? (
           <Pagination
             totalItems={totalItems}
             onPaginate={(page) => {
@@ -100,6 +100,8 @@ class Table extends Component {
             onSortAndPaginate={onSortAndPaginate}
             sortedField={sortedField}
           />
+        ) : (
+          <></>
         )}
       </>
     );

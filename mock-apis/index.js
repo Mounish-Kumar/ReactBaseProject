@@ -8,6 +8,7 @@ const jsonDirectory = __dirname + "/responses";
 const baseUrl = "/api";
 const encoding = "utf8";
 const contentType = "application/json";
+const timeout = 3000;
 
 // Enabling CORS
 app.use(function (req, res, next) {
@@ -25,34 +26,81 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Mock APIs
-app.get(`${baseUrl}/todos`, function (req, res) {
+app.post(`${baseUrl}/employees`, function (req, res) {
   res.set("Content-Type", contentType);
-  fs.readFile(`${jsonDirectory}/todosResponse.json`, encoding, (err, data) => {
-    // res.status(500).send({ description: "Some error occured in the server" });
-	setTimeout(() => {
-		res.end(data);
-	}, 3000);
-  });
+  fs.readFile(
+    `${jsonDirectory}/employee/getEmployees.json`,
+    encoding,
+    (err, data) => {
+      setTimeout(() => {
+        console.log("Get Request Body: ", req.body);
+        // res.status(500).end(data);
+        res.end(data);
+      }, timeout);
+    }
+  );
 });
 
-app.get(`${baseUrl}/hello/:firstName`, function (req, res) {
+app.get(`${baseUrl}/employee/:id`, function (req, res) {
   res.set("Content-Type", contentType);
-  fs.readFile(`${jsonDirectory}/sampleResponse.json`, encoding, (err, data) => {
-    console.log("First Name: ", req.params.firstName);
-    // res.status(500).send({ description: "Some error occured in the server" });
-    res.end(data);
-  });
+  fs.readFile(
+    `${jsonDirectory}/employee/getEmployee.json`,
+    encoding,
+    (err, data) => {
+      setTimeout(() => {
+        console.log("Get ID: ", req.params.id);
+        // res.status(500).end(data);
+        res.end(data);
+      }, timeout);
+    }
+  );
 });
 
-app.post(`${baseUrl}/hello/:firstName`, function (req, res) {
+app.post(`${baseUrl}/employee`, function (req, res) {
   res.set("Content-Type", contentType);
-  fs.readFile(`${jsonDirectory}/sampleResponse.json`, encoding, (err, data) => {
-    console.log("First Name: ", req.params.firstName);
-    // res.status(400).send({ description: "Input is invalid" });
-    res.end(data);
-  });
+  fs.readFile(
+    `${jsonDirectory}/employee/createEmployee.json`,
+    encoding,
+    (err, data) => {
+      setTimeout(() => {
+        console.log("Create Request Body: ", req.body);
+        // res.status(500).end(data);
+        res.end(data);
+      }, timeout);
+    }
+  );
+});
+
+app.put(`${baseUrl}/employee/:id`, function (req, res) {
+  res.set("Content-Type", contentType);
+  fs.readFile(
+    `${jsonDirectory}/employee/updateEmployee.json`,
+    encoding,
+    (err, data) => {
+      setTimeout(() => {
+        console.log("Update Request Body: ", req.body);
+        // res.status(500).end(data);
+        res.end(data);
+      }, timeout);
+    }
+  );
+});
+
+app.delete(`${baseUrl}/employee/:id`, function (req, res) {
+  res.set("Content-Type", contentType);
+  fs.readFile(
+    `${jsonDirectory}/employee/deleteEmployee.json`,
+    encoding,
+    (err, data) => {
+      setTimeout(() => {
+        console.log("Delete ID: ", req.params.id);
+        // res.status(500).end(data);
+        res.end(data);
+      }, timeout);
+    }
+  );
 });
 
 var server = app.listen(portNumber, function () {
-  console.log(`Mock apis running at http://localhost:${portNumber}`);
+  console.log(`Mock apis running at http://localhost:${portNumber}${baseUrl}`);
 });

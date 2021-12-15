@@ -1,0 +1,11 @@
+{
+    "message": "Successfully deleted!",
+    "fieldErrorMessages": null,
+    "employee": {
+        "id": 1,
+        "firstName": "Mounish Kumar",
+        "email": "mounish@abc.com",
+        "phone": "888",
+        "address": "Perumbakkam"
+    }
+}

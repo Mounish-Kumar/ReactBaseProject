@@ -1,9 +1,7 @@
 import axios from "axios";
 import { METHOD } from "../consts";
 
-const { REACT_APP_BASE_PATH } = process.env;
-
-export const request = ({
+const request = ({
   method,
   url,
   headers,
@@ -22,10 +20,12 @@ export const request = ({
   return axios({
     method,
     url,
-    baseURL: REACT_APP_BASE_PATH,
+    baseURL: "http://localhost:8080/api",
     headers,
     params,
     data: requestBody,
     timeout,
   });
 };
+
+export default request;

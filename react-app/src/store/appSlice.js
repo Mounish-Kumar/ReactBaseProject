@@ -15,8 +15,9 @@ export const appSlice = createSlice({
       state.trails.push(action.payload);
     },
     deleteBreadcrumbTrails: (state, action) => {
-      const deleteFromIndex = action.payload.index + 1;
-      if (deleteFromIndex < state.length) {
+      const { index } = action.payload;
+      const deleteFromIndex = index + 1;
+      if (deleteFromIndex < state.trails.length) {
         state.trails.splice(deleteFromIndex);
       }
     },
