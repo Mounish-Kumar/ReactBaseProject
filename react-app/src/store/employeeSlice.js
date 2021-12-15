@@ -3,7 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const employeeSlice = createSlice({
   name: "employee",
   initialState: {
-    searchParams: {},
+    searchParams: {
+      sortColumn: "id",
+      sortOrder: "desc",
+      currentPage: 1,
+      pageSize: 10,
+      startIndex: 1,
+      endIndex: 10,
+    },
     employees: [],
     totalItems: 0,
   },

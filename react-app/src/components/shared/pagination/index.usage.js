@@ -3,6 +3,8 @@ import CodeHighlighter from "../code-highlighter";
 import Pagination from ".";
 
 class PaginationUsage extends Component {
+  pageInit = { currentPage: 1, pageSize: 10, startIndex: 1, endIndex: 10 };
+
   handlePaginate = (page) => {
     console.log("Current Page Number = " + page.currentPage);
     console.log("Page Size = " + page.pageSize);
@@ -14,6 +16,7 @@ class PaginationUsage extends Component {
     <Pagination
       totalItems={45}
       onPaginate={this.handlePaginate}
+      pageInit={this.pageInit}
       paginateOnLoad={true}
     />
   );
@@ -32,6 +35,7 @@ class PaginationUsage extends Component {
 <Pagination
   totalItems={45}
   onPaginate={this.handlePaginate}
+  pageInit={this.pageInit}
   paginateOnLoad={true}
 />
           `}
@@ -50,7 +54,15 @@ handlePaginate = (page) => {
           `}
         </CodeHighlighter>
         <br />
-        To call onPaginate method on component load
+        If you want to change initial page values, you can make use of this
+        optional field.
+        <CodeHighlighter language="js">
+          {`
+pageInit = { currentPage: 1, pageSize: 10, startIndex: 1, endIndex: 10 };
+          `}
+        </CodeHighlighter>
+        <br />
+        To call onPaginate method on component load.
         <CodeHighlighter language="js">
           {`
 paginateOnLoad={true}

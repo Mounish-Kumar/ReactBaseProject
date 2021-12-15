@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class Pagination extends Component {
-  state = {
-    currentPage: 1,
-    pageSize: 10,
-    startIndex: 1,
-    endIndex: 10,
-  };
+  constructor(props) {
+    super(props);
+
+    const { currentPage, pageSize, startIndex, endIndex } =
+      props.pageInit || {};
+
+    this.state = {
+      currentPage: currentPage || 1,
+      pageSize: pageSize || 10,
+      startIndex: startIndex || 1,
+      endIndex: endIndex || 10,
+    };
+  }
 
   pageSizeOptions = [5, 10, 20, 50, 100];
 
   componentDidMount() {
-    this.props.paginateOnLoad && this.navigateTo(1);
+    this.props.paginateOnLoad && this.navigateTo(this.state.currentPage);
   }
 
   handlePageSizeChange = (event) => {
@@ -102,6 +109,7 @@ class Pagination extends Component {
 Pagination.propTypes = {
   totalItems: PropTypes.number.isRequired,
   onPaginate: PropTypes.func.isRequired,
+  pageInit: PropTypes.object,
   paginateOnLoad: PropTypes.bool,
   onSortAndPaginate: PropTypes.func,
   sortedField: PropTypes.object,

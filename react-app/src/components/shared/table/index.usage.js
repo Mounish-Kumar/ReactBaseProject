@@ -71,6 +71,8 @@ class TableUsage extends Component {
     // Your fetch call here
   };
 
+  pageInit = { currentPage: 1, pageSize: 10, startIndex: 1, endIndex: 10 };
+
   handlePaginate = (page) => {
     const { currentPage, pageSize, startIndex, endIndex } = page;
     console.log("Current Page Number = " + currentPage);
@@ -96,10 +98,12 @@ class TableUsage extends Component {
     <Table
       dataList={this.dataList}
       mapping={this.mapping}
-      sortInit={this.sortInit}
       onSort={this.handleSort}
+      sortInit={this.sortInit}
+      sortOnLoad={true}
       totalItems={45}
       onPaginate={this.handlePaginate}
+      pageInit={this.pageInit}
       paginateOnLoad={true}
       onSortAndPaginate={this.handleSortAndPaginate}
     />
@@ -119,11 +123,14 @@ class TableUsage extends Component {
 <Table
   dataList={this.dataList}
   mapping={this.mapping}
-  sortInit={this.sortInit}
+
   onSort={this.handleSort}
+  sortInit={this.sortInit}
+  sortOnLoad={true}
 
   totalItems={45}
   onPaginate={this.handlePaginate}
+  pageInit={this.pageInit}
   paginateOnLoad={true}
 
   onSortAndPaginate={this.handleSortAndPaginate}
@@ -182,20 +189,28 @@ mapping = {
           `}
         </CodeHighlighter>
         <br />
-        To sort the table on load, configure sortInit
-        <CodeHighlighter language="js">
-          {`
-sortInit = { key: "id", order: "desc" };
-          `}
-        </CodeHighlighter>
-        <br />
-        Callback method to handle onClick of sort icon present in table header
+        Callback method to handle onClick of sort icon present in table header.
         <CodeHighlighter language="js">
           {`
 handleSort = (key, order) => {
   console.log("Sort by '" + key + "' in " + order);
   // Your fetch call here
 };
+          `}
+        </CodeHighlighter>
+        <br />
+        If you want to set initial sort value, you can make use of this optional
+        field.
+        <CodeHighlighter language="js">
+          {`
+sortInit = { key: "id", order: "desc" };
+          `}
+        </CodeHighlighter>
+        <br />
+        To call onSort method on component load.
+        <CodeHighlighter language="js">
+          {`
+sortOnLoad={true}
           `}
         </CodeHighlighter>
         <br />
@@ -219,6 +234,14 @@ handlePaginate = (page) => {
   console.log("Page End Index = " + endIndex);
   // Your fetch call here
 };
+          `}
+        </CodeHighlighter>
+        <br />
+        If you want to change initial page values, you can make use of this
+        optional field. This should be used only if you need pagination.
+        <CodeHighlighter language="js">
+          {`
+pageInit = { currentPage: 1, pageSize: 10, startIndex: 1, endIndex: 10 };
           `}
         </CodeHighlighter>
         <br />

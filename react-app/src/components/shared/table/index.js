@@ -7,26 +7,29 @@ class Table extends Component {
   constructor(props) {
     super(props);
 
+    const { currentPage, pageSize, startIndex, endIndex } =
+      props.pageInit || {};
+
     this.state = {
       sortedField: props.sortInit,
       page: {
-        currentPage: 1,
-        pageSize: 10,
-        startIndex: 1,
-        endIndex: 10,
+        currentPage: currentPage || 1,
+        pageSize: pageSize || 10,
+        startIndex: startIndex || 1,
+        endIndex: endIndex || 10,
       },
     };
   }
 
   componentDidMount() {
-    const { sortInit } = this.props;
+    const { sortInit, sortOnLoad } = this.props;
     const { key, order } = sortInit || {};
-    if (key && order) {
+    if (sortOnLoad && key) {
       this.handleSort(key, order);
     }
   }
 
-  handleSort = (key, order) => {
+  handleSort = (key, order = "asc") => {
     const { onSort, onSortAndPaginate } = this.props;
     const sortedField = { key, order };
     this.setState({ sortedField }, () => {
@@ -40,8 +43,10 @@ class Table extends Component {
       dataList,
       mapping,
       sortInit,
+      sortOnLoad,
       totalItems,
       onPaginate,
+      pageInit,
       paginateOnLoad,
       onSortAndPaginate,
     } = this.props;
@@ -96,7 +101,8 @@ class Table extends Component {
                 onPaginate && onPaginate(page);
               });
             }}
-            paginateOnLoad={!sortInit && paginateOnLoad}
+            pageInit={pageInit}
+            paginateOnLoad={!sortOnLoad && paginateOnLoad}
             onSortAndPaginate={onSortAndPaginate}
             sortedField={sortedField}
           />
@@ -111,8 +117,17 @@ class Table extends Component {
 Table.propTypes = {
   dataList: PropTypes.array.isRequired,
   mapping: PropTypes.object.isRequired,
-  sortInit: PropTypes.object,
+
   onSort: PropTypes.func,
+  sortInit: PropTypes.object,
+  sortOnLoad: PropTypes.bool,
+
+  totalItems: PropTypes.number,
+  onPaginate: PropTypes.func,
+  pageInit: PropTypes.object,
+  paginateOnLoad: PropTypes.bool,
+
+  onSortAndPaginate: PropTypes.func,
 };
 
 export default Table;

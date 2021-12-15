@@ -8,6 +8,7 @@ import { addBreadcrumbTrail } from "../../../store/appSlice";
 import { setSearchParams } from "../../../store/employeeSlice";
 
 export default function EmployeeList(props) {
+  const searchParams = useSelector((store) => store.employee.searchParams);
   const employees = useSelector((store) => store.employee.employees);
   const totalItems = useSelector((store) => store.employee.totalItems);
   const dispatch = useDispatch();
@@ -69,23 +70,24 @@ export default function EmployeeList(props) {
   };
 
   const handleSortAndPaginate = (sort, page) => {
-    const searchParams = {
+    const params = {
       sortColumn: sort.key,
       sortOrder: sort.order,
       ...page,
     };
 
-    dispatch(setSearchParams(searchParams));
+    dispatch(setSearchParams(params));
 
-    props.onSearch(searchParams);
+    props.onSearch(params);
   };
 
   return (
     <Table
       dataList={employees}
       mapping={mapping}
-      sortInit={{ key: "id", order: "desc" }}
+      sortInit={{ key: searchParams.sortColumn, order: searchParams.sortOrder }}
       totalItems={totalItems}
+      pageInit={{ ...searchParams }}
       onSortAndPaginate={handleSortAndPaginate}
     />
   );

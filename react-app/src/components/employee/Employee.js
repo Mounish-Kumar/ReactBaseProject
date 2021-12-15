@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EmployeeList from "./employee-list/EmployeeList";
@@ -20,8 +20,15 @@ export default function Employee(props) {
   const [showAlertPopup, setShowAlertPopup] = useState(false);
 
   const searchParams = useSelector((store) => store.employee.searchParams);
+  const employees = useSelector((store) => store.employee.employees);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!employees || !employees.length) {
+      handleSearch(searchParams);
+    }
+  }, []);
 
   const handleSearch = (params) => {
     dispatch(showLoader());
@@ -42,6 +49,7 @@ export default function Employee(props) {
 
   const handleDelete = (employee) => {
     dispatch(showLoader());
+    setShowAlertPopup(false);
 
     deleteEmployee(employee)
       .then((res) => {
@@ -56,8 +64,6 @@ export default function Employee(props) {
         }
       })
       .then(() => dispatch(hideLoader()));
-
-    setShowAlertPopup(false);
   };
 
   return (
