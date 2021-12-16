@@ -9,10 +9,10 @@ export const getEmployees = (searchParams) => {
   });
 };
 
-export const getEmployee = (employee) => {
+export const getEmployee = (employeeId) => {
   return request({
     method: METHOD.GET,
-    url: `/employee/${employee.id}`,
+    url: `/employee/${employeeId}`,
   });
 };
 
@@ -32,9 +32,9 @@ export const updateEmployee = (employee) => {
   });
 };
 
-export const deleteEmployee = (employee) => {
+export const deleteEmployee = (employeeId) => {
   return request({
     method: METHOD.DELETE,
-    url: `/employee/${employee.id}`,
+    url: `/employee/${employeeId}`,
   });
 };

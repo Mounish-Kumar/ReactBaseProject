@@ -45,17 +45,8 @@ class HeaderUsage extends Component {
     changeTheme: true,
   };
 
-  handleNavigate = ({ label, path }) => {
-    console.log(`Navigated to ${label} : ${path}`);
-  };
-
   code = (
-    <Header
-      logo={this.logo}
-      menu={this.menu}
-      settings={this.settings}
-      onNavigate={this.handleNavigate}
-    />
+    <Header logo={this.logo} menu={this.menu} settings={this.settings} />
   );
 
   render() {
@@ -73,7 +64,6 @@ class HeaderUsage extends Component {
   logo={this.logo}
   menu={this.menu}
   settings={this.settings}
-  onNavigate={this.handleNavigate}
 />
           `}
         </CodeHighlighter>
@@ -123,13 +113,6 @@ settings = {
   changeLanguage: true,  // To show Change Language setting
   changeTheme: true  // To show Change Theme setting
 }
-        `}</CodeHighlighter>
-        <br />
-        Optional callback method to handle onNavigate
-        <CodeHighlighter language="js">{`
-handleNavigate = ({ label, path }) => {
-  console.log("Navigated to " + label + " : " + path);
-};
         `}</CodeHighlighter>
       </React.Fragment>
     );

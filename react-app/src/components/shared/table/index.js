@@ -55,7 +55,7 @@ class Table extends Component {
     const { key: sortedKey, order: sortedOrder } = sortedField || {};
 
     return (
-      <>
+      <div>
         <table>
           <thead>
             <tr>
@@ -109,7 +109,7 @@ class Table extends Component {
         ) : (
           <></>
         )}
-      </>
+      </div>
     );
   }
 }

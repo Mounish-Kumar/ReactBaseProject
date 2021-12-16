@@ -8,11 +8,7 @@ import AccessDenied from "../shared/access-denied";
 import Breadcrumb from "../shared/breadcrumb";
 import AlertMessage from "./../shared/alert-message/index";
 import { connect } from "react-redux";
-import {
-  startBreadcrumbTrail,
-  deleteBreadcrumbTrails,
-  deleteMessage,
-} from "../../store/appSlice";
+import { deleteBreadcrumbTrails, deleteMessage } from "../../store/appSlice";
 
 class App extends React.Component {
   constructor() {
@@ -25,33 +21,17 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const path = window.location.hash.substring(1);
-    this.props.startBreadcrumbTrail({ path });
-  }
-
   render() {
     const { menu, settings, routes } = this.state;
     const enabledMenu =
       menu && menu.flatMap((menuItem) => menuItem.subMenu || [menuItem]);
-    const {
-      trails,
-      messages,
-      loader,
-      startBreadcrumbTrail,
-      deleteBreadcrumbTrails,
-      deleteMessage,
-    } = this.props;
+    const { trails, messages, loader, deleteBreadcrumbTrails, deleteMessage } =
+      this.props;
 
     return (
       <HashRouter>
         <div className="root">
-          <SideNav
-            logo={navOptions.logo}
-            menu={menu}
-            settings={settings}
-            onNavigate={startBreadcrumbTrail}
-          />
+          <SideNav logo={navOptions.logo} menu={menu} settings={settings} />
 
           <div className="wrapper">
             <Breadcrumb
@@ -112,7 +92,6 @@ const mapStoreToProps = (store) => ({
 });
 
 const mapDispatchToProps = {
-  startBreadcrumbTrail,
   deleteBreadcrumbTrails,
   deleteMessage,
 };

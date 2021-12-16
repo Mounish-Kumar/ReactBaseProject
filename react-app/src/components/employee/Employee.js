@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import EmployeeList from "./employee-list/EmployeeList";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   showLoader,
   hideLoader,
   addSuccessMessage,
   addErrorMessage,
-  addBreadcrumbTrail,
+  startBreadcrumbTrail,
 } from "../../store/appSlice";
 import { setEmployees } from "../../store/employeeSlice";
 import Popup from "./../shared/popup/index";
@@ -22,10 +22,21 @@ export default function Employee(props) {
   const searchParams = useSelector((store) => store.employee.searchParams);
   const employees = useSelector((store) => store.employee.employees);
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
 
+  const pageTitle = "Employee";
+
   useEffect(() => {
-    if (!employees || !employees.length) {
+    dispatch(
+      startBreadcrumbTrail({ label: pageTitle, path: location.pathname })
+    );
+
+    if (
+      !employees ||
+      !employees.length ||
+      (location.state && location.state.refresh)
+    ) {
       handleSearch(searchParams);
     }
   }, []);
@@ -51,7 +62,7 @@ export default function Employee(props) {
     dispatch(showLoader());
     setShowAlertPopup(false);
 
-    deleteEmployee(employee)
+    deleteEmployee(employee.id)
       .then((res) => {
         if (res && res.data && res.data.message) {
           dispatch(addSuccessMessage(res.data.message));
@@ -67,22 +78,16 @@ export default function Employee(props) {
   };
 
   return (
-    <div>
-      <h2>Employee</h2>
-      <br />
+    <div className="page">
+      <h2>{pageTitle}</h2>
+
       <Button
         variant="outlined"
-        onClick={() => {
-          const path = "/employee/create";
-          const trail = { label: "Create Employee", path };
-          dispatch(addBreadcrumbTrail(trail));
-          navigate(path);
-        }}
+        onClick={() => navigate("/employee/create")}
         startIcon={<AddRoundedIcon />}
       >
         Create Employee
       </Button>
-      <div style={{ paddingBottom: "2rem" }} />
 
       <EmployeeList
         onSearch={handleSearch}

@@ -13,16 +13,11 @@ class Header extends Component {
 
   getMenuItem = (item) => {
     const { path, icon, label, disabled, subMenu } = item;
-    const { onNavigate } = this.props;
 
     return (
       <React.Fragment>
         {path && (
-          <NavLink
-            to={path}
-            className="menu-item"
-            onClick={() => onNavigate && onNavigate({ label, path })}
-          >
+          <NavLink to={path} className="menu-item">
             {icon}
             <span>{label}</span>
           </NavLink>
@@ -44,7 +39,7 @@ class Header extends Component {
   toggleMenu = (isClose) => this.setState({ showMenu: isClose });
 
   render() {
-    const { logo, menu, settings, onNavigate } = this.props;
+    const { logo, menu, settings } = this.props;
     const { userName, userCode, logoutUrl, changeLanguage, changeTheme } =
       settings || {};
 
@@ -52,11 +47,7 @@ class Header extends Component {
 
     return (
       <header>
-        <NavLink
-          to={logo.path}
-          className="logo"
-          onClick={() => onNavigate && onNavigate({ path: logo.path })}
-        >
+        <NavLink to={logo.path} className="logo">
           {logo.icon}
         </NavLink>
 

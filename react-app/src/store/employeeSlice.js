@@ -13,6 +13,7 @@ export const employeeSlice = createSlice({
     },
     employees: [],
     totalItems: 0,
+    employee: {},
   },
   reducers: {
     setEmployees: (state, action) => {

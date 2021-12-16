@@ -4,7 +4,6 @@ import Table from "../../shared/table";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { addBreadcrumbTrail } from "../../../store/appSlice";
 import { setSearchParams } from "../../../store/employeeSlice";
 
 export default function EmployeeList(props) {
@@ -23,12 +22,7 @@ export default function EmployeeList(props) {
         return (
           <a
             className="anchor"
-            onClick={() => {
-              const path = `/employee/view/${rowData.id}`;
-              const trail = { label: `View Employee: ${rowData.id}`, path };
-              dispatch(addBreadcrumbTrail(trail));
-              navigate(path);
-            }}
+            onClick={() => navigate(`/employee/view/${rowData.id}`)}
           >
             {rowData.id}
           </a>
@@ -45,12 +39,7 @@ export default function EmployeeList(props) {
         return (
           <IconButton
             color="primary"
-            onClick={() => {
-              const path = `/employee/edit/${rowData.id}`;
-              const trail = { label: `Edit Employee: ${rowData.id}`, path };
-              dispatch(addBreadcrumbTrail(trail));
-              navigate(path);
-            }}
+            onClick={() => navigate(`/employee/edit/${rowData.id}`)}
           >
             <EditIcon />
           </IconButton>
