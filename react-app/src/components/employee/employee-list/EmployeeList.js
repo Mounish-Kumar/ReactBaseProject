@@ -1,17 +1,13 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Table from "../../shared/table";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { setSearchParams } from "../../../store/employeeSlice";
 
 export default function EmployeeList(props) {
-  const searchParams = useSelector((store) => store.employee.searchParams);
-  const employees = useSelector((store) => store.employee.employees);
-  const totalItems = useSelector((store) => store.employee.totalItems);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { dataList, searchParams, totalItems, onSearch, onDelete } = props;
 
   const mapping = {
     id: {
@@ -50,7 +46,7 @@ export default function EmployeeList(props) {
       heading: "Delete",
       renderField: (rowData) => {
         return (
-          <IconButton color="primary" onClick={() => props.onDelete(rowData)}>
+          <IconButton color="primary" onClick={() => onDelete(rowData)}>
             <DeleteIcon />
           </IconButton>
         );
@@ -58,26 +54,20 @@ export default function EmployeeList(props) {
     },
   };
 
-  const handleSortAndPaginate = (sort, page) => {
-    const params = {
-      sortColumn: sort.key,
-      sortOrder: sort.order,
-      ...page,
-    };
-
-    dispatch(setSearchParams(params));
-
-    props.onSearch(params);
-  };
-
   return (
     <Table
-      dataList={employees}
+      dataList={dataList}
       mapping={mapping}
       sortInit={{ key: searchParams.sortColumn, order: searchParams.sortOrder }}
       totalItems={totalItems}
       pageInit={{ ...searchParams }}
-      onSortAndPaginate={handleSortAndPaginate}
+      onSortAndPaginate={(sort, page) => {
+        onSearch({
+          sortColumn: sort.key,
+          sortOrder: sort.order,
+          ...page,
+        });
+      }}
     />
   );
 }

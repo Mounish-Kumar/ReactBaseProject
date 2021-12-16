@@ -11,7 +11,7 @@ import {
   addErrorMessage,
   startBreadcrumbTrail,
 } from "../../store/appSlice";
-import { setEmployees } from "../../store/employeeSlice";
+import { setEmployees, setSearchParams } from "../../store/employeeSlice";
 import Popup from "./../shared/popup/index";
 import { getEmployees, deleteEmployee } from "../../services/api/employee.api";
 
@@ -21,6 +21,8 @@ export default function Employee(props) {
 
   const searchParams = useSelector((store) => store.employee.searchParams);
   const employees = useSelector((store) => store.employee.employees);
+  const totalItems = useSelector((store) => store.employee.totalItems);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,6 +44,7 @@ export default function Employee(props) {
   }, []);
 
   const handleSearch = (params) => {
+    dispatch(setSearchParams(params));
     dispatch(showLoader());
 
     getEmployees(params)
@@ -90,6 +93,9 @@ export default function Employee(props) {
       </Button>
 
       <EmployeeList
+        dataList={employees}
+        searchParams={searchParams}
+        totalItems={totalItems}
         onSearch={handleSearch}
         onDelete={(employee) => {
           setSelectedEmployee(employee);

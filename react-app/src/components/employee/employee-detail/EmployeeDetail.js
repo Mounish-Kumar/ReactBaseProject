@@ -18,11 +18,12 @@ import {
 
 export default function EmployeeDetail(props) {
   const [employee, setEmployee] = useState({});
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const params = useParams();
   const location = useLocation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const isCreate = location.pathname.includes("/create");
   const isView = location.pathname.includes("/view") && params.id;
@@ -105,6 +106,8 @@ export default function EmployeeDetail(props) {
         onChange={(e) => setField("firstName", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
+        error={!!fieldErrors.firstName}
+        helperText={fieldErrors.firstName}
       />
 
       <TextField
@@ -114,6 +117,8 @@ export default function EmployeeDetail(props) {
         onChange={(e) => setField("email", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
+        error={!!fieldErrors.email}
+        helperText={fieldErrors.email}
       />
 
       <TextField
@@ -123,6 +128,8 @@ export default function EmployeeDetail(props) {
         onChange={(e) => setField("phone", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
+        error={!!fieldErrors.phone}
+        helperText={fieldErrors.phone}
       />
 
       <TextField
@@ -134,6 +141,8 @@ export default function EmployeeDetail(props) {
         onChange={(e) => setField("address", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
+        error={!!fieldErrors.address}
+        helperText={fieldErrors.address}
       />
 
       <div className="button-group">
