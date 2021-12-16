@@ -38,22 +38,26 @@ export default function EmployeeDetail(props) {
     dispatch(addBreadcrumbTrail({ label: pageTitle, path: location.pathname }));
 
     if (isView || isEdit) {
-      dispatch(showLoader());
-
-      getEmployee(params.id)
-        .then((res) => {
-          if (res && res.data && res.data.employee) {
-            setEmployee(res.data.employee);
-          }
-        })
-        .catch((err) => {
-          if (err && err.response && err.response.data) {
-            dispatch(addErrorMessage(err.response.data.message));
-          }
-        })
-        .then(() => dispatch(hideLoader()));
+      fetchEmployee(params.id);
     }
   }, []);
+
+  const fetchEmployee = (employeeId) => {
+    dispatch(showLoader());
+
+    getEmployee(employeeId)
+      .then((res) => {
+        if (res && res.data && res.data.employee) {
+          setEmployee(res.data.employee);
+        }
+      })
+      .catch((err) => {
+        if (err && err.response && err.response.data) {
+          dispatch(addErrorMessage(err.response.data.message));
+        }
+      })
+      .then(() => dispatch(hideLoader()));
+  };
 
   const setField = (fieldName, value) => {
     const changedEmployee = { ...employee };
