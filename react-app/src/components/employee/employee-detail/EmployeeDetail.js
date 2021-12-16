@@ -15,10 +15,21 @@ import {
   createEmployee,
   updateEmployee,
 } from "../../../services/api/employee.api";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schemaObject = {
+  id: yup.string(),
+  firstName: yup.string().required(),
+  email: yup.string().email().required(),
+  phone: yup.string(),
+  address: yup.string(),
+};
+const schema = yup.object(schemaObject).required();
 
 export default function EmployeeDetail(props) {
   const [employee, setEmployee] = useState({});
-  const [fieldErrors, setFieldErrors] = useState({});
 
   const params = useParams();
   const location = useLocation();
@@ -26,14 +37,25 @@ export default function EmployeeDetail(props) {
   const dispatch = useDispatch();
 
   const isCreate = location.pathname.includes("/create");
-  const isView = location.pathname.includes("/view") && params.id;
-  const isEdit = location.pathname.includes("/edit") && params.id;
+  const isView = params.id && location.pathname.includes("/view");
+  const isEdit = params.id && location.pathname.includes("/edit");
 
   const pageTitle = isCreate
     ? "Create Employee"
     : isView
     ? `View Employee : ${params.id}`
     : `Edit Employee : ${params.id}`;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: employee,
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
 
   useEffect(() => {
     dispatch(addBreadcrumbTrail({ label: pageTitle, path: location.pathname }));
@@ -49,6 +71,7 @@ export default function EmployeeDetail(props) {
     getEmployee(employeeId)
       .then((res) => {
         if (res && res.data && res.data.employee) {
+          reset(res.data.employee);
           setEmployee(res.data.employee);
         }
       })
@@ -58,12 +81,6 @@ export default function EmployeeDetail(props) {
         }
       })
       .then(() => dispatch(hideLoader()));
-  };
-
-  const setField = (fieldName, value) => {
-    const changedEmployee = { ...employee };
-    changedEmployee[fieldName] = value;
-    setEmployee(changedEmployee);
   };
 
   const handleSave = (employee) => {
@@ -85,15 +102,25 @@ export default function EmployeeDetail(props) {
       .then(() => dispatch(hideLoader()));
   };
 
+  const handleReset = () => {
+    if (isCreate) {
+      const resettedEmployee = {};
+      Object.keys(schemaObject).forEach((key) => (resettedEmployee[key] = ""));
+      reset(resettedEmployee);
+    } else {
+      reset(employee);
+    }
+  };
+
   return (
-    <div className="page page-center">
+    <form className="page page-center">
       <h2>{pageTitle}</h2>
 
       {(isView || isEdit) && (
         <TextField
           label="ID"
+          {...register("id")}
           variant="outlined"
-          value={employee.id}
           InputProps={{ readOnly: true }}
           InputLabelProps={{ shrink: true }}
         />
@@ -101,72 +128,63 @@ export default function EmployeeDetail(props) {
 
       <TextField
         label="First Name"
+        {...register("firstName")}
         variant="outlined"
-        value={employee.firstName}
-        onChange={(e) => setField("firstName", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!fieldErrors.firstName}
-        helperText={fieldErrors.firstName}
+        error={!!errors.firstName}
+        helperText={errors?.firstName?.message}
       />
 
       <TextField
         label="Email"
+        {...register("email")}
         variant="outlined"
-        value={employee.email}
-        onChange={(e) => setField("email", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!fieldErrors.email}
-        helperText={fieldErrors.email}
+        error={!!errors.email}
+        helperText={errors?.email?.message}
       />
 
       <TextField
         label="Phone"
+        {...register("phone")}
         variant="outlined"
-        value={employee.phone}
-        onChange={(e) => setField("phone", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!fieldErrors.phone}
-        helperText={fieldErrors.phone}
+        error={!!errors.phone}
+        helperText={errors?.phone?.message}
       />
 
       <TextField
         label="Address"
+        {...register("address")}
         variant="outlined"
         multiline
         rows={4}
-        value={employee.address}
-        onChange={(e) => setField("address", e.target.value)}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!fieldErrors.address}
-        helperText={fieldErrors.address}
+        error={!!errors.address}
+        helperText={errors?.address?.message}
       />
 
       <div className="button-group">
         <Button variant="outlined" onClick={() => navigate("/employee")}>
           Go Back
         </Button>
-        {isCreate && (
-          <Button
-            variant="outlined"
-            onClick={() => {
-              const resettedEmployee = { ...employee };
-              for (var key in resettedEmployee) resettedEmployee[key] = "";
-              setEmployee(resettedEmployee);
-            }}
-          >
-            Reset
-          </Button>
-        )}
+
         {(isCreate || isEdit) && (
-          <Button variant="contained" onClick={() => handleSave(employee)}>
-            Save
-          </Button>
+          <>
+            <Button variant="outlined" onClick={handleReset}>
+              Reset
+            </Button>
+
+            <Button variant="contained" onClick={handleSubmit(handleSave)}>
+              Save
+            </Button>
+          </>
         )}
       </div>
-    </div>
+    </form>
   );
 }
