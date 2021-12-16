@@ -81,7 +81,7 @@ export default function EmployeeDetail(props) {
   };
 
   return (
-    <div className="page page-form">
+    <div className="page page-center">
       <h2>{pageTitle}</h2>
 
       {(isView || isEdit) && (
