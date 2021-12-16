@@ -21,9 +21,9 @@ import * as yup from "yup";
 
 const schemaObject = {
   id: yup.string(),
-  firstName: yup.string().required(),
+  firstName: yup.string().min(2).required(),
   email: yup.string().email().required(),
-  phone: yup.string(),
+  phone: yup.number(),
   address: yup.string(),
 };
 const schema = yup.object(schemaObject).required();
@@ -132,7 +132,7 @@ export default function EmployeeDetail(props) {
         variant="outlined"
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!errors.firstName}
+        error={!!errors?.firstName}
         helperText={errors?.firstName?.message}
       />
 
@@ -142,7 +142,7 @@ export default function EmployeeDetail(props) {
         variant="outlined"
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!errors.email}
+        error={!!errors?.email}
         helperText={errors?.email?.message}
       />
 
@@ -152,7 +152,7 @@ export default function EmployeeDetail(props) {
         variant="outlined"
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!errors.phone}
+        error={!!errors?.phone}
         helperText={errors?.phone?.message}
       />
 
@@ -164,7 +164,7 @@ export default function EmployeeDetail(props) {
         rows={4}
         InputProps={{ readOnly: isView }}
         InputLabelProps={{ shrink: true }}
-        error={!!errors.address}
+        error={!!errors?.address}
         helperText={errors?.address?.message}
       />
 
