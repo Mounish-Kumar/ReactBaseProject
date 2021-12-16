@@ -124,6 +124,8 @@ export default function EmployeeDetail(props) {
       <TextField
         label="Address"
         variant="outlined"
+        multiline
+        rows={4}
         value={employee.address}
         onChange={(e) => setField("address", e.target.value)}
         InputProps={{ readOnly: isView }}
