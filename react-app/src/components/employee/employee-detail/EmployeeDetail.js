@@ -40,7 +40,12 @@ const schemaObject = {
 const schema = yup.object(schemaObject).required();
 
 export default function EmployeeDetail(props) {
-  const [employee, setEmployee] = useState({});
+  const [employee, setEmployee] = useState({
+    firstName: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
 
   const params = useParams();
   const location = useLocation();
@@ -62,6 +67,8 @@ export default function EmployeeDetail(props) {
     handleSubmit,
     reset,
     formState: { errors },
+    setError,
+    clearErrors,
   } = useForm({
     defaultValues: employee,
     mode: "onBlur",
@@ -107,20 +114,21 @@ export default function EmployeeDetail(props) {
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
-          dispatch(addErrorMessage(err.response.data.message));
+          const { message, fieldErrorMessages } = err.response.data;
+
+          dispatch(addErrorMessage(message));
+
+          if (fieldErrorMessages) {
+            Object.keys(fieldErrorMessages).map((key) => {
+              setError(key, {
+                type: "manual",
+                message: fieldErrorMessages[key],
+              });
+            });
+          }
         }
       })
       .then(() => dispatch(hideLoader()));
-  };
-
-  const handleReset = () => {
-    if (isCreate) {
-      const resettedEmployee = {};
-      Object.keys(schemaObject).forEach((key) => (resettedEmployee[key] = ""));
-      reset(resettedEmployee);
-    } else {
-      reset(employee);
-    }
   };
 
   return (
@@ -186,7 +194,13 @@ export default function EmployeeDetail(props) {
 
         {(isCreate || isEdit) && (
           <>
-            <Button variant="outlined" onClick={handleReset}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                reset(employee);
+                clearErrors();
+              }}
+            >
               Reset
             </Button>
 

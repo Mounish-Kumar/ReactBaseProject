@@ -23,16 +23,20 @@ export const appSlice = createSlice({
     },
 
     addSuccessMessage: (state, action) => {
-      state.messages.push({ type: "SUCCESS", message: action.payload });
+      if (action.payload)
+        state.messages.push({ type: "SUCCESS", message: action.payload });
     },
     addErrorMessage: (state, action) => {
-      state.messages.push({ type: "ERROR", message: action.payload });
+      if (action.payload)
+        state.messages.push({ type: "ERROR", message: action.payload });
     },
     addWarningMessage: (state, action) => {
-      state.messages.push({ type: "WARNING", message: action.payload });
+      if (action.payload)
+        state.messages.push({ type: "WARNING", message: action.payload });
     },
     addInfoMessage: (state, action) => {
-      state.messages.push({ type: "INFO", message: action.payload });
+      if (action.payload)
+        state.messages.push({ type: "INFO", message: action.payload });
     },
     deleteMessage: (state, action) => {
       const deleteIndex = action.payload;

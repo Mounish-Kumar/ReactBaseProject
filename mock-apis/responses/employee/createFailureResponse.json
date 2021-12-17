@@ -1,0 +1,7 @@
+{
+    "message": "Error in few fields",
+    "fieldErrorMessages": {
+		"phone": "Phone number already exists",
+		"email": "Email already exists"
+	}
+}

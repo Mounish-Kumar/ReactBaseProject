@@ -8,7 +8,7 @@ const jsonDirectory = __dirname + "/responses";
 const baseUrl = "/api";
 const encoding = "utf8";
 const contentType = "application/json";
-const timeout = 3000;
+const timeout = 1000;
 
 // Enabling CORS
 app.use(function (req, res, next) {
@@ -34,7 +34,7 @@ app.post(`${baseUrl}/employees`, function (req, res) {
     (err, data) => {
       setTimeout(() => {
         console.log("Get Request Body: ", req.body);
-        // res.status(500).end(data);
+        // res.status(400).end(data);
         res.end(data);
       }, timeout);
     }
@@ -49,7 +49,7 @@ app.get(`${baseUrl}/employee/:id`, function (req, res) {
     (err, data) => {
       setTimeout(() => {
         console.log("Get ID: ", req.params.id);
-        // res.status(500).end(data);
+        // res.status(400).end(data);
         res.end(data);
       }, timeout);
     }
@@ -59,12 +59,12 @@ app.get(`${baseUrl}/employee/:id`, function (req, res) {
 app.post(`${baseUrl}/employee`, function (req, res) {
   res.set("Content-Type", contentType);
   fs.readFile(
-    `${jsonDirectory}/employee/createEmployee.json`,
+    `${jsonDirectory}/employee/createFailureResponse.json`,
     encoding,
     (err, data) => {
       setTimeout(() => {
         console.log("Create Request Body: ", req.body);
-        // res.status(500).end(data);
+        // res.status(400).end(data);
         res.end(data);
       }, timeout);
     }
@@ -74,12 +74,12 @@ app.post(`${baseUrl}/employee`, function (req, res) {
 app.put(`${baseUrl}/employee/:id`, function (req, res) {
   res.set("Content-Type", contentType);
   fs.readFile(
-    `${jsonDirectory}/employee/updateEmployee.json`,
+    `${jsonDirectory}/employee/createFailureResponse.json`,
     encoding,
     (err, data) => {
       setTimeout(() => {
         console.log("Update Request Body: ", req.body);
-        // res.status(500).end(data);
+        // res.status(400).end(data);
         res.end(data);
       }, timeout);
     }
@@ -94,7 +94,7 @@ app.delete(`${baseUrl}/employee/:id`, function (req, res) {
     (err, data) => {
       setTimeout(() => {
         console.log("Delete ID: ", req.params.id);
-        // res.status(500).end(data);
+        // res.status(400).end(data);
         res.end(data);
       }, timeout);
     }
