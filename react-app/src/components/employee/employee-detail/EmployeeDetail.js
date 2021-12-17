@@ -21,10 +21,21 @@ import * as yup from "yup";
 
 const schemaObject = {
   id: yup.string(),
-  firstName: yup.string().min(2).required(),
-  email: yup.string().email().required(),
-  phone: yup.number(),
-  address: yup.string(),
+  firstName: yup
+    .string()
+    .required()
+    .min(2)
+    .matches(
+      /^[a-zA-Z ]*$/,
+      "First Name must contain only alphabets and spaces"
+    )
+    .label("First Name"),
+  email: yup.string().email().required().label("Email"),
+  phone: yup
+    .string()
+    .matches(/^[0-9]*$/, "Phone must be numeric")
+    .label("Phone"),
+  address: yup.string().label("Address"),
 };
 const schema = yup.object(schemaObject).required();
 
