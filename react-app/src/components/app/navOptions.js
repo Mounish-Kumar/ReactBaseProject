@@ -1,15 +1,5 @@
+import React from "react";
 import logo from "../../assets/images/logo.svg";
-import Dashboard from "../dashboard/Dashboard";
-import HeaderUsage from "../shared/header/index.usage";
-import SideNavUsage from "../shared/side-nav/index.usage";
-import BreadcrumbUsage from "../shared/breadcrumb/index.usage";
-import LoaderUsage from "../shared/loader/index.usage";
-import PopupUsage from "../shared/popup/index.usage";
-import TableUsage from "../shared/table/index.usage";
-import PaginationUsage from "../shared/pagination/index.usage";
-import AlertMessageUsage from "../shared/alert-message/index.usage";
-import TabsUsage from "../shared/tabs/index.usage";
-import ExpandCollapseUsage from "../shared/expand-collapse/index.usage";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ChatIcon from "@mui/icons-material/Chat";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
@@ -23,7 +13,29 @@ import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
 import SyncIcon from "@mui/icons-material/Sync";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import Employee from "./../employee/Employee";
+
+// Lazy load components
+const HeaderUsage = React.lazy(() => import("../shared/header/index.usage"));
+const SideNavUsage = React.lazy(() => import("../shared/side-nav/index.usage"));
+const BreadcrumbUsage = React.lazy(() =>
+  import("../shared/breadcrumb/index.usage")
+);
+const LoaderUsage = React.lazy(() => import("../shared/loader/index.usage"));
+const PopupUsage = React.lazy(() => import("../shared/popup/index.usage"));
+const TableUsage = React.lazy(() => import("../shared/table/index.usage"));
+const PaginationUsage = React.lazy(() =>
+  import("../shared/pagination/index.usage")
+);
+const AlertMessageUsage = React.lazy(() =>
+  import("../shared/alert-message/index.usage")
+);
+const TabsUsage = React.lazy(() => import("../shared/tabs/index.usage"));
+const ExpandCollapseUsage = React.lazy(() =>
+  import("../shared/expand-collapse/index.usage")
+);
+
+const Dashboard = React.lazy(() => import("../dashboard/Dashboard"));
+const Employee = React.lazy(() => import("../employee/Employee"));
 
 const navOptions = {
   logo: {

@@ -42,38 +42,40 @@ class App extends React.Component {
             />
 
             <div className="container">
-              <Routes>
-                {enabledMenu &&
-                  enabledMenu.map((menuItem) => (
-                    <Route
-                      key={menuItem.path}
-                      path={menuItem.path}
-                      element={
-                        menuItem.disabled ? (
-                          <AccessDenied />
-                        ) : (
-                          menuItem.component
-                        )
-                      }
-                    />
-                  ))}
+              <React.Suspense fallback={<Loader showFull={true} />}>
+                <Routes>
+                  {enabledMenu &&
+                    enabledMenu.map((menuItem) => (
+                      <Route
+                        key={menuItem.path}
+                        path={menuItem.path}
+                        element={
+                          menuItem.disabled ? (
+                            <AccessDenied />
+                          ) : (
+                            menuItem.component
+                          )
+                        }
+                      />
+                    ))}
 
-                {routes &&
-                  routes.map((route) => (
-                    <Route
-                      key={route.path}
-                      path={route.path}
-                      element={
-                        route.disabled ? <AccessDenied /> : route.component
-                      }
-                    />
-                  ))}
+                  {routes &&
+                    routes.map((route) => (
+                      <Route
+                        key={route.path}
+                        path={route.path}
+                        element={
+                          route.disabled ? <AccessDenied /> : route.component
+                        }
+                      />
+                    ))}
 
-                <Route
-                  path="*"
-                  element={<Navigate replace to={REDIRECT_DEFAULT} />}
-                />
-              </Routes>
+                  <Route
+                    path="*"
+                    element={<Navigate replace to={REDIRECT_DEFAULT} />}
+                  />
+                </Routes>
+              </React.Suspense>
             </div>
           </div>
         </div>

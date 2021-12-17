@@ -1,6 +1,9 @@
-import EmployeeDetail from "./../employee/employee-detail/EmployeeDetail";
+import React from "react";
 
-export const REDIRECT_DEFAULT = "/dashboard";
+// Lazy load components
+const EmployeeDetail = React.lazy(() =>
+  import("./../employee/employee-detail/EmployeeDetail")
+);
 
 const routes = [
   {
@@ -18,3 +21,5 @@ const routes = [
 ];
 
 export default routes;
+
+export const REDIRECT_DEFAULT = "/dashboard";
