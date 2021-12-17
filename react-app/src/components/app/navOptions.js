@@ -33,7 +33,6 @@ const TabsUsage = React.lazy(() => import("../shared/tabs/index.usage"));
 const ExpandCollapseUsage = React.lazy(() =>
   import("../shared/expand-collapse/index.usage")
 );
-
 const Dashboard = React.lazy(() => import("../dashboard/Dashboard"));
 const Employee = React.lazy(() => import("../employee/Employee"));
 
