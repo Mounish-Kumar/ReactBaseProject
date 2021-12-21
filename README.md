@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# What problem does it solve?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+While creating React backoffice applications from scratch, we've to
 
-## Available Scripts
+Install many commonly used external libraries such as node-sass, material-ui, axios, react-router-dom, redux, etc
 
-In the project directory, you can run:
+Design and develop many reusable components for layout
 
-### `npm start`
+Develop mock apis to test the UI independently
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Making this setup ready for a traditional backoffice application takes its own sweet time. React Base Project aims at minimising this time by providing all the necessary setup.Now you might ask, "What's the use of creating all the components from scratch? We already have plenty of UI libraries like Material UI and React Bootstrap for that". The problem with these libraries is that, it's not customizable to a larger extent. Of course we can change the colour and theme, but changing the entire look and feel is not possible. Wouldn't it be nicer, if we've access to edit the source code of these common components as per our need? That's exactly what we (React Base Project) provide. All you've to do is, clone this project and start developing your business screens directly. In case you want to change the look and feel of a common component, feel free to do so, because everything is customizable now!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+# How to setup the project?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install NodeJS in your machine, if not available already
 
-### `npm run build`
+Clone the project from [GitHub](https://github.com/Mounish-Kumar/ReactBaseProject)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Navigate to /ReactBaseProject/react-app/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open command prompt and execute the command "npm install" (Make sure you are connected to open internet without VPN or Proxy)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Navigate to /ReactBaseProject/mock-apis/ and execute the command "npm install"
 
-### `npm run eject`
+Once the installation is complete, execute the command "npm run start" in /ReactBaseProject/react-app/ and /ReactBaseProject/mock-apis/
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The application will be launched in the browser, else go to [http://localhost:3001](http://localhost:3001)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+That's it! Now you will be able to see all the reusable components and its usage documentation by clicking on the components in Side Navigation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# What are the components available?
 
-## Learn More
+Header
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+SideNav
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Breadcrumb
 
-### Code Splitting
+Loader
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Popup
 
-### Analyzing the Bundle Size
+Table
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Pagination
 
-### Making a Progressive Web App
+AlertMessage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Tabs
 
-### Advanced Configuration
+ExpandCollape
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+# How to use it?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Menu:
 
-### `npm run build` fails to minify
+If you want to add or modify menu in Side Navigation bar, you have to change in /ReactBaseProject/react-app/src/components/app/navOptions.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Routes:
+
+If you want to configure additional routes other than menu navigation, you have to change in /ReactBaseProject/react-app/src/components/app/routes.js
+
+### Components
+
+Write your components (or business screens) inside /ReactBaseProject/react-app/src/components/ directory
+
+### Shared Components
+
+Write your reusable generic components inside /ReactBaseProject/react-app/src/components/shared/ directory
+
+### API calls
+Write your API calls by creating a new .api.js file inside /ReactBaseProject/react-app/src/services/api/ directory
+
+### Utilities & Constants
+
+Write all your reusable functions inside /ReactBaseProject/react-app/src/services/utils.js
+
+Write all your constants inside /ReactBaseProject/react-app/src/services/consts.js
+
+### Styles
+
+Write your styles by creating a new .scss file inside /ReactBaseProject/react-app/src/styles/ directory and import it in styles.scss file
+
+### Images & Fonts
+
+You can add images inside /ReactBaseProject/react-app/src/assets/images/ directory
+
+You can add fonts inside /ReactBaseProject/react-app/src/assets/fonts/ directory
+
+### Redux Store
+
+You can create Slice for your components inside /ReactBaseProject/react-app/src/store/ directory and add its reducer in store.js file
+
+### Frequently Used Actions
+
+You can make use of the below given frequently used actions from /ReactBaseProject/react-app/src/store/appSlice.js
+
+Starting a breadcrumb trail or adding in existing breadcrumb trail
+
+Adding success or error messageShowing or hiding full screen loader
+
+### Delete Directories
+
+Delete the below directories. They're just given as an example
+
+/ReactBaseProject/react-app/src/components/employee/
+
+/ReactBaseProject/react-app/src/components/dashboard/
