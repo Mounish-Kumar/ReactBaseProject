@@ -1,4 +1,4 @@
-# What problem does it solve?
+## What problem does it solve?
 
 While creating React backoffice applications from scratch, we've to
 
@@ -11,11 +11,11 @@ While creating React backoffice applications from scratch, we've to
 Making this setup ready for a traditional backoffice application takes its own sweet time. React Base Project aims at minimising this time by providing all the necessary setup. Now you might ask, "What's the use of creating all the components from scratch? We already have plenty of UI libraries like Material UI and React Bootstrap for that". The problem with these libraries is that, it's not customizable to a larger extent. Of course we can change the colour and theme, but changing the entire look and feel is not possible. Wouldn't it be nicer, if we've access to edit the source code of these common components as per our need? That's exactly what we (React Base Project) provide. All you've to do is, clone this project and start developing your business screens directly. In case you want to change the look and feel of a common component, feel free to do so, because everything is customizable now!
 
 
-# How to setup the project?
+## How to setup the project?
 
-* Install NodeJS in your machine, if not available already
+* Download and nstall NodeJS in your machine, if not available already
 
-* Clone the project from [GitHub](https://github.com/Mounish-Kumar/ReactBaseProject)
+* Clone the project from [https://github.com/Mounish-Kumar/ReactBaseProject](https://github.com/Mounish-Kumar/ReactBaseProject)
 
 * Navigate to /ReactBaseProject/react-app/
 
@@ -30,7 +30,7 @@ Making this setup ready for a traditional backoffice application takes its own s
 That's it! Now you will be able to see all the reusable components and its usage documentation by clicking on the components in Side Navigation
 
 
-# What are the components available?
+## What are the components available?
 
 * Header
 
@@ -53,7 +53,7 @@ That's it! Now you will be able to see all the reusable components and its usage
 * ExpandCollape
 
 
-# How to use it?
+## How to use it?
 
 ### Menu:
 
@@ -107,8 +107,10 @@ You can make use of the below given frequently used actions from /ReactBaseProj
 
 ### Delete Directories
 
-The below directories are just given as an example
+The below directories are given just as an example. Delete them if you want
 
 * /ReactBaseProject/react-app/src/components/employee/
 
 * /ReactBaseProject/react-app/src/components/dashboard/
+
+
