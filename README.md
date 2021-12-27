@@ -13,7 +13,7 @@ Making this setup ready for a traditional backoffice application takes its own s
 
 ## How to setup the project?
 
-* Download and nstall NodeJS in your machine, if not available already
+* Download and install NodeJS in your machine, if not available already
 
 * Clone the project from [https://github.com/Mounish-Kumar/ReactBaseProject](https://github.com/Mounish-Kumar/ReactBaseProject)
 
